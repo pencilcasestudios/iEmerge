@@ -1,0 +1,5 @@
+Gem management
+==============
+cd ~/Projects/Rails/iEmerge
+bundle update
+gem cleanup
