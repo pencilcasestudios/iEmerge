@@ -1,3 +1,11 @@
+Setting up after cloning the repository
+=======================================
+Link externalised assets:
+cd ~/Projects/Rails/iEmerge/app/assets
+ln -nfs ~/Dropbox/iEmerge\ Agency/Repositories/Images/ images
+
+
+
 Gem management
 ==============
 cd ~/Projects/Rails/iEmerge
