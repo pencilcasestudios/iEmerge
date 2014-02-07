@@ -16,7 +16,7 @@
 /tmp
 
 
-# Externalise assets but link them for deployment
+# Externalise assets (remember to link them for deployment)
 app/assets/docs
 app/assets/images
 app/assets/pdfs
