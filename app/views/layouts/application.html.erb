@@ -3,14 +3,26 @@
   <head>
     <%= display_meta_tags(default_meta_tags) %>
 
+    <%= render "viewport" %>
+
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
-    <%= csrf_meta_tags %>
-  </head>
 
-  <body>
+    <%= render "favicons" %>
+
+    <%= csrf_meta_tags %>
+
+    <%= render "analytics" %>
+  </head>
+  <body id="<%= body_id %>">
+    <%= render "notifications" %>
+
+    <%= render "navigation" %>
 
     <%= yield %>
+
+    <%= render "footer" %>
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>
