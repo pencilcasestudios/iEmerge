@@ -1,13 +1,783 @@
-Setting up after cloning the repository
-=======================================
+#----------------------------------------------------------------------
+# Development setup
+# Setting up the development environment after a fresh repository clone
+#----------------------------------------------------------------------
+cd ~/Projects/Clients/iEmerge
+cp config/examples/database/database.yml config # Setup the database
+cp config/examples/config/config.yml config # Setup the configuration files
+cp config/examples/deploy.rb config # Setup the capistrano deployment recipe
+cp config/examples/deploy/*.rb config/deploy # Setup deployment stage configuration
+
 Link externalised assets:
-cd ~/Projects/Rails/iEmerge/app/assets
-ln -nfs ~/Dropbox/iEmerge\ Agency/Repositories/Images/ images
+cd ~/Projects/Clients/iEmerge/app/assets
+ln -nfs ~/Dropbox/iEmerge\ Office/Repositories/Images/ images
+
+# Set up the hosts (/etc/hosts)
+# 127.0.0.1	iemergeagency.dev		www.iemergeagency.dev
+
+# Setup deployment references:
+git remote add virtual deploy@rails.vm:/var/Repositories/Git/iEmerge.git
+git remote add staging deploy@genesis.vps:/var/Repositories/Git/iEmerge.git
+git remote add production deploy@deuteronomy.vps:/var/Repositories/Git/iEmerge.git
 
 
 
-Gem management
-==============
-cd ~/Projects/Rails/iEmerge
+
+# Tests
+#======
+# Git
+git push virtual
+git push staging
+git push production
+
+# Guard for testing
+cd ~/Projects/Clients/iEmerge
 bundle update
 gem cleanup
+rake db:drop
+rake db:setup
+rake db:test:prepare
+bundle exec guard
+
+
+
+
+# Running the Application
+#========================
+cd ~/Projects/Clients/iEmerge
+rails server # In one terminal window - to run the application
+
+cd ~/Projects/Clients/iEmerge
+rake jobs:work # In another terminal window - to run delayed job
+
+cd ~/Projects/Clients/iEmerge
+rails console # In another terminal window - to manage administrators
+
+
+
+
+# Administration
+#===============
+# Creating an administrator
+# In the Rails console, select the user:
+u = User.first
+u.admin?
+
+# Promote the user to administrator
+u.promote
+u.save
+u.admin?
+
+
+
+
+# Gem management
+#===============
+# MAINTAIN GEM BUNDLE
+bundle update
+gem cleanup
+
+# DELETE ALL INSTALLED GEMS
+gem list | cut -d" " -f1 | xargs gem uninstall -aIx
+
+
+
+
+# Continuous Application Deployment
+#==================================
+# VIRTUAL
+git checkout master
+git merge dev
+git push
+git push virtual
+cap virtual deploy
+git tag "`date +virtual_%Y-%m-%d_%H%M%S`"
+
+# STAGING
+git checkout master
+git merge dev
+git push
+git push staging
+cap staging deploy
+git tag "`date +staging_%m-%d_%H%M%S`"
+
+# PRODUCTION
+git checkout master
+git merge dev
+git push
+git push production
+cap production deploy
+git tag "`date +production_%Y-%m-%d_%H%M%S`"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------
+# Virtual setup
+#----------------------------------------------------------------------
+# Need:
+# Git
+# ImageMagick
+# MariaDB					# Remember to install libmariadbclient-dev (for the # mysql2 gem to work)
+# nginx
+# nodejs				# JavaScript runtime
+# RVM
+# SSH
+
+
+# Test SSH access:
+ssh deploy@rails.vm
+ssh vladimir@rails.vm
+
+# Set up the hosts (/etc/hosts):
+ssh vladimir@rails.vm
+
+# Make sure the following line is in /etc/hosts:
+# 127.0.0.1 rails.vm
+
+# Check that SSH "loops back" on the virtual machine (host key verification):
+# On the local development machine
+ssh deploy@rails.vm
+
+# On the virtual machine
+ssh deploy@rails.vm
+
+# Or
+
+# If the "loop back" fails:
+ssh-keygen
+ssh-copy-id deploy@rails.vm
+
+
+# Set up the Repository folder
+ssh vladimir@rails.vm
+sudo mkdir -p /var/Repositories/Git
+sudo chown -R deploy:deploy /var/Repositories
+
+# Create the Git repository:
+ssh deploy@rails.vm
+cd /var/Repositories/Git/
+mkdir iEmerge.git
+cd iEmerge.git
+git init --bare
+
+# Push to the Git repository:
+# From the development machine:
+cd ~/Projects/Clients/iEmerge
+git remote add virtual deploy@rails.vm:/var/Repositories/Git/iEmerge.git
+git push virtual # or git push virtual master
+
+
+# Set up the Apps folder
+ssh vladimir@rails.vm
+sudo mkdir -p /var/Apps
+sudo chown -R deploy:deploy /var/Apps
+
+
+# Create the AssetsVault folder
+ssh vladimir@rails.vm
+sudo mkdir -p /var/AssetsVault
+sudo chown -R deploy:deploy /var/AssetsVault
+
+
+# Configure nginx
+# On the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/nginx
+scp nginx.iemergeagency.virtual.conf vladimir@rails.vm:~/iemergeagency.virtual.conf
+
+
+# On the virtual machine
+# Set up the nginx configuration
+ssh vladimir@rails.vm
+sudo mv ~/iemergeagency.virtual.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemergeagency.virtual.conf /etc/nginx/sites-enabled/iemergeagency.virtual
+
+
+# Generate an SSL certificate and key:
+sudo mkdir -p /etc/nginx/ssl
+cd /etc/nginx/ssl
+sudo mkdir -p iEmerge
+cd iEmerge
+sudo openssl genrsa -des3 -out iemergeagency.virtual.key 1024
+
+# pass phrase: iemergeagency
+
+sudo openssl req -new -key iemergeagency.virtual.key -out iemergeagency.virtual.csr
+
+# Country Name: ZM
+# Province: Lusaka Province
+# Locality Name: Lusaka
+# Organisation Name: iEmerge Farms
+# Orgnisational Unit Name: <Blank>
+# Common Name: iemergeagency.virtual.
+# Email: itsupport@pencilcasestudios.com
+# Challenge password: <Blank>
+# Optional Company Name: <Blank>
+
+sudo cp iemergeagency.virtual.key iemergeagency.virtual.key.original
+sudo openssl rsa -in iemergeagency.virtual.key.original -out iemergeagency.virtual.key
+sudo openssl x509 -req -days 365 -in iemergeagency.virtual.csr -signkey iemergeagency.virtual.key -out iemergeagency.virtual.crt
+
+
+# Test the nginx configuration:
+sudo nginx -t
+
+# If all is well, load the new nginx configuration:
+sudo service nginx reload
+
+# Setup the MariaDB database user:
+ssh vladimir@rails.vm
+mysql -u root -p
+create user 'iemergeagency'@'localhost' identified by 'VirtualiEmergePassword';
+grant all on iEmerge_virtual.* to 'iemergeagency'@'localhost';
+grant all on iEmerge_virtual_development.* to 'iemergeagency'@'localhost';
+grant all on iEmerge_virtual_test.* to 'iemergeagency'@'localhost';
+
+# Setup the MariaDB database:
+mysql -u iemergeagency -p
+create database iEmerge_virtual;
+create database iEmerge_virtual_development;
+create database iEmerge_virtual_test;
+
+
+# Setup the Monit scripts:
+# From the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/monit
+scp delayed_job.iemergeagency.virtual.monitrc vladimir@rails.vm:~
+cd ~/Projects/Clients/iEmerge
+ssh vladimir@rails.vm
+
+# From the virtual machine
+sudo mv ~/delayed_job.iemergeagency.virtual.monitrc /etc/monit/conf.d/
+sudo service monit syntax
+
+
+# Setup the YAML configuration files:
+# From the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/config
+scp config.virtual.yml deploy@rails.vm:~/config.yml
+cd ~/Projects/Clients/iEmerge/config/examples/database
+scp database.virtual.yml deploy@rails.vm:~/database.yml
+cd ~/Projects/Clients/iEmerge/
+ssh deploy@rails.vm
+
+# From the virtual machine (as the deploy user)
+cd
+mkdir -p ~/Projects/Configurations/iEmerge/virtual
+mv database.yml ~/Projects/Configurations/iEmerge/virtual/
+mv config.yml ~/Projects/Configurations/iEmerge/virtual/
+
+# From the development machine
+# Capistrano steps for initial deployment
+# VIRTUAL MACHINE DEPLOYMENT
+git checkout master
+git merge dev
+git push
+git push virtual # May need to 'git push virtual master'
+cap virtual deploy:setup # Update configuration files and create the database after this
+
+# From the virtual machine (as the deploy user)
+# After running cap virtual deploy:setup
+cd ~/Projects/Configurations/iEmerge/virtual
+cp *.yml /var/Apps/iEmerge/virtual/shared/config/
+
+cap virtual deploy:check
+cap virtual deploy:update
+# Create databases
+cap virtual deploy:migrate
+cap virtual db:seed
+cap virtual deploy:start
+
+
+# After deploying the app
+# From the virtual machine
+sudo service monit reload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------
+# Staging setup
+#----------------------------------------------------------------------
+# Need:
+# Git
+# ImageMagick
+# MariaDB					# Remember to install libmariadbclient-dev (for the # mysql2 gem to work)
+# nginx
+# nodejs				# JavaScript runtime
+# RVM
+# SSH
+
+
+# Test SSH access:
+ssh deploy@genesis.vps
+ssh silumesii@genesis.vps
+
+# Set up the hosts (/etc/hosts):
+ssh silumesii@genesis.vps
+
+# Make sure the following line is in /etc/hosts:
+# 127.0.0.1 genesis.vps
+
+# Check that SSH "loops back" on the staging machine (host key verification):
+# On the local development machine
+ssh deploy@genesis.vps
+
+# On the staging machine
+ssh deploy@genesis.vps
+
+# Or
+
+# If the "loop back" fails:
+ssh-keygen
+ssh-copy-id deploy@genesis.vps
+
+
+# Set up the Repository folder
+ssh silumesii@genesis.vps
+sudo mkdir -p /var/Repositories/Git
+sudo chown -R deploy:deploy /var/Repositories
+
+# Create the Git repository:
+ssh deploy@genesis.vps
+cd /var/Repositories/Git/
+mkdir iEmerge.git
+cd iEmerge.git
+git init --bare
+
+# Push to the Git repository:
+# From the development machine:
+cd ~/Projects/Clients/iEmerge
+git remote add staging deploy@genesis.vps:/var/Repositories/Git/iEmerge.git
+git push staging # or git push staging master
+
+
+# Set up the Apps folder
+ssh vladimir@rails.vm
+sudo mkdir -p /var/Apps
+sudo chown -R deploy:deploy /var/Apps
+
+
+# Create the AssetsVault folder
+ssh vladimir@rails.vm
+sudo mkdir -p /var/AssetsVault
+sudo chown -R deploy:deploy /var/AssetsVault
+
+
+# Configure nginx
+# On the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/nginx
+scp nginx.iemergeagency.clientcase.net.conf silumesii@genesis.vps:~/iemergeagency.clientcase.net.conf
+
+
+# On the staging machine
+# Set up the nginx configuration
+ssh silumesii@genesis.vps
+sudo mv ~/iemergeagency.clientcase.net.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemergeagency.clientcase.net.conf /etc/nginx/sites-enabled/iemergeagency.clientcase.net
+
+
+# Generate an SSL certificate and key:
+sudo mkdir -p /etc/nginx/ssl
+cd /etc/nginx/ssl
+sudo mkdir -p iEmerge
+cd iEmerge
+sudo openssl genrsa -des3 -out iemergeagency.clientcase.net.key 1024
+
+# pass phrase: iemergeagency
+
+sudo openssl req -new -key iemergeagency.clientcase.net.key -out iemergeagency.clientcase.net.csr
+
+# Country Name: ZM
+# Province: Lusaka Province
+# Locality Name: Lusaka
+# Organisation Name: iEmerge Farms
+# Orgnisational Unit Name: <Blank>
+# Common Name: iemergeagency.clientcase.net.
+# Email: itsupport@pencilcasestudios.com
+# Challenge password: <Blank>
+# Optional Company Name: <Blank>
+
+sudo cp iemergeagency.clientcase.net.key iemergeagency.clientcase.net.key.original
+sudo openssl rsa -in iemergeagency.clientcase.net.key.original -out iemergeagency.clientcase.net.key
+sudo openssl x509 -req -days 365 -in iemergeagency.clientcase.net.csr -signkey iemergeagency.clientcase.net.key -out iemergeagency.clientcase.net.crt
+
+
+# Test the nginx configuration:
+sudo nginx -t
+
+# If all is well, load the new nginx configuration:
+sudo service nginx reload
+
+# Setup the MariaDB database user:
+ssh silumesii@genesis.vps
+mysql -u root -p
+create user 'iemergeagency'@'localhost' identified by 'StagingiEmergePassword';
+grant all on iEmerge_staging.* to 'iemergeagency'@'localhost';
+grant all on iEmerge_staging_development.* to 'iemergeagency'@'localhost';
+grant all on iEmerge_staging_test.* to 'iemergeagency'@'localhost';
+
+# Setup the MariaDB database:
+mysql -u iemergeagency -p
+create database iEmerge_staging;
+create database iEmerge_staging_development;
+create database iEmerge_staging_test;
+
+
+# Setup the Monit scripts:
+# From the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/monit
+scp delayed_job.iemergeagency.clientcase.net.monitrc silumesii@genesis.vps:~
+cd ~/Projects/Clients/iEmerge
+ssh silumesii@genesis.vps
+
+# From the staging machine
+sudo mv ~/delayed_job.iemergeagency.clientcase.net.monitrc /etc/monit/conf.d/
+sudo service monit syntax
+
+
+# Setup the YAML configuration files:
+# From the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/config
+scp config.staging.yml deploy@genesis.vps:~/config.yml
+cd ~/Projects/Clients/iEmerge/config/examples/database
+scp database.staging.yml deploy@genesis.vps:~/database.yml
+cd ~/Projects/Clients/iEmerge/
+ssh deploy@genesis.vps
+
+# From the staging machine (as the deploy user)
+cd
+mkdir -p ~/Projects/Configurations/iEmerge/staging
+mv database.yml ~/Projects/Configurations/iEmerge/staging/
+mv config.yml ~/Projects/Configurations/iEmerge/staging/
+# After this, update:
+# 1. the production database password
+# 2. the production email password
+
+# From the development machine
+# Capistrano steps for initial deployment
+# STAGING MACHINE DEPLOYMENT
+git checkout master
+git merge dev
+git push
+git push staging # May need to 'git push staging master'
+cap staging deploy:setup # Update configuration files and create the database after this
+
+# From the staging machine (as the deploy user)
+# After running cap staging deploy:setup
+cd ~/Projects/Configurations/iEmerge/staging
+cp *.yml /var/Apps/iEmerge/staging/shared/config/
+
+cap staging deploy:check
+cap staging deploy:update
+# Create databases
+cap staging deploy:migrate
+cap staging db:seed
+cap staging deploy:start
+
+
+# After deploying the app
+# From the staging machine
+sudo service monit reload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------
+# Production setup
+#----------------------------------------------------------------------
+# Need:
+# Git
+# ImageMagick
+# MariaDB					# Remember to install libmariadbclient-dev (for the # mysql2 gem to work)
+# nginx
+# nodejs				# JavaScript runtime
+# RVM
+# SSH
+
+
+# Test SSH access:
+ssh deploy@deuteronomy.vps
+ssh silumesii@deuteronomy.vps
+
+# Set up the hosts (/etc/hosts):
+ssh silumesii@deuteronomy.vps
+
+# Make sure the following line is in /etc/hosts:
+# 127.0.0.1 deuteronomy.vps
+
+# Check that SSH "loops back" on the production machine (host key verification):
+# On the local development machine
+ssh deploy@deuteronomy.vps
+
+# On the production machine
+ssh deploy@deuteronomy.vps
+
+# Or
+
+# If the "loop back" fails:
+ssh-keygen
+ssh-copy-id deploy@deuteronomy.vps
+
+
+# Set up the Repository folder
+ssh silumesii@deuteronomy.vps
+sudo mkdir -p /var/Repositories/Git
+sudo chown -R deploy:deploy /var/Repositories
+
+# Create the Git repository:
+ssh deploy@deuteronomy.vps
+cd /var/Repositories/Git/
+mkdir iEmerge.git
+cd iEmerge.git
+git init --bare
+
+# Push to the Git repository:
+# From the development machine:
+cd ~/Projects/Clients/iEmerge
+git remote add production deploy@deuteronomy.vps:/var/Repositories/Git/iEmerge.git
+git push production # or git push production master
+
+
+# Set up the Apps folder
+ssh silumesii@deuteronomy.vps
+sudo mkdir -p /var/Apps
+sudo chown -R deploy:deploy /var/Apps
+
+
+# Create the AssetsVault folder
+ssh silumesii@deuteronomy.vps
+sudo mkdir -p /var/AssetsVault
+sudo chown -R deploy:deploy /var/AssetsVault
+
+
+# Configure nginx
+# On the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/nginx
+scp nginx.iemergeagency.zm.conf silumesii@deuteronomy.vps:~/iemergeagency.zm.conf
+
+
+# On the production machine
+# Set up the nginx configuration
+ssh silumesii@deuteronomy.vps
+sudo mv ~/iemergeagency.zm.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemergeagency.zm.conf /etc/nginx/sites-enabled/iemergeagency.zm
+
+
+# Generate an SSL certificate and key:
+sudo mkdir -p /etc/nginx/ssl
+cd /etc/nginx/ssl
+sudo mkdir -p iEmerge
+cd iEmerge
+sudo openssl genrsa -des3 -out iemergeagency.zm.key 1024
+
+# pass phrase: iemergeagency
+
+sudo openssl req -new -key iemergeagency.zm.key -out iemergeagency.zm.csr
+
+# Country Name: ZM
+# Province: Lusaka Province
+# Locality Name: Lusaka
+# Organisation Name: iEmerge Farms
+# Orgnisational Unit Name: <Blank>
+# Common Name: iemergeagency.zm.
+# Email: itsupport@pencilcasestudios.com
+# Challenge password: <Blank>
+# Optional Company Name: <Blank>
+
+sudo cp iemergeagency.zm.key iemergeagency.zm.key.original
+sudo openssl rsa -in iemergeagency.zm.key.original -out iemergeagency.zm.key
+sudo openssl x509 -req -days 365 -in iemergeagency.zm.csr -signkey iemergeagency.zm.key -out iemergeagency.zm.crt
+
+
+# Test the nginx configuration:
+sudo nginx -t
+
+# If all is well, load the new nginx configuration:
+sudo service nginx reload
+
+# Setup the MariaDB database user:
+ssh silumesii@deuteronomy.vps
+mysql -u root -p
+create user 'iemergeagency'@'localhost' identified by 'ProductioniEmergePassword';
+grant all on iEmerge_production.* to 'iemergeagency'@'localhost';
+grant all on iEmerge_production_development.* to 'iemergeagency'@'localhost';
+grant all on iEmerge_production_test.* to 'iemergeagency'@'localhost';
+
+# Setup the MariaDB database:
+ssh deploy@deuteronomy.vps
+mysql -u iemergeagency -p
+create database iEmerge_production;
+create database iEmerge_production_development;
+create database iEmerge_production_test;
+
+
+# Setup the Monit scripts:
+# From the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/monit
+scp delayed_job.iemergeagency.zm.monitrc silumesii@deuteronomy.vps:~
+cd ~/Projects/Clients/iEmerge
+ssh silumesii@deuteronomy.vps
+
+# From the production machine
+sudo mv ~/delayed_job.iemergeagency.zm.monitrc /etc/monit/conf.d/
+sudo service monit syntax
+
+
+# Setup the YAML configuration files:
+# From the development machine
+cd ~/Projects/Clients/iEmerge/config/examples/config
+scp config.production.yml deploy@deuteronomy.vps:~/config.yml
+cd ~/Projects/Clients/iEmerge/config/examples/database
+scp database.production.yml deploy@deuteronomy.vps:~/database.yml
+cd ~/Projects/Clients/iEmerge/
+ssh deploy@deuteronomy.vps
+
+# From the production machine (as the deploy user)
+cd
+mkdir -p ~/Projects/Configurations/iEmerge/production
+mv database.yml ~/Projects/Configurations/iEmerge/production/
+mv config.yml ~/Projects/Configurations/iEmerge/production/
+# After this, update:
+# 1. the production database password
+# 2. the production email password
+
+# From the development machine
+# Capistrano steps for initial deployment
+# PRODUCTION MACHINE DEPLOYMENT
+cd ~/Projects/Clients/iEmerge
+git checkout master
+git merge dev
+git push
+git push production # May need to 'git push production master'
+cap production deploy:setup # Update configuration files and create the database after this
+
+# From the production machine (as the deploy user)
+# After running cap production deploy:setup
+cd ~/Projects/Configurations/iEmerge/production
+cp *.yml /var/Apps/iEmerge/production/shared/config/
+
+cap production deploy:check
+cap production deploy:update
+# Create databases
+cap production deploy:migrate
+cap production db:seed
+cap production deploy:start
+
+
+# After deploying the app
+# From the production machine
+sudo service monit reload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Hints
+#======
+
+# gzip
+#-----
+gzip database.sql
+
+
+# ImageMagick
+#------------
+convert -resize 350x525 -gravity center -extent 350x525 brochure_advertisement_cover.png tmp.png
+
+
+# MariaDB
+#--------
+# Database export:
+# The EXTENSION can be something like "sql"
+mysqldump -u USERNAME -p DATABASE_NAME > ~/OUTPUTFILE.EXTENSION
+
+# Database import:
+mysql -u USERNAME -p DATABASE_NAME < BACKUPFILE
+
+# Set or update user password
+set password for 'username'@'localhost' = password('cleartext password');
+
+
+# Ruby
+#-----
+# Working with gemsets:
+rvm @global do gem update
+rvm @global do gem cleanup
+
+
+
+
+
+
+
+
+
+# Links
+#======
+http://gorails.com/deploy/ubuntu/12.04
+http://stackoverflow.com/questions/3031412/how-to-export-a-mysql-database-using-command-prompt
+http://webcheatsheet.com/SQL/mysql_backup_restore.php
+http://www.modrails.com/documentation/Users%20guide%20Nginx.html (Note the "RVM helper tool" section)
+https://dev.mysql.com/doc/refman/5.0/en/set-password.html
+https://dev.mysql.com/doc/refman/5.1/en/mysqldump.html
+https://rvm.io/gemsets/global
