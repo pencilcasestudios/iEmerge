@@ -1,0 +1,183 @@
+@import "common";
+
+section {
+	padding-top: 2em;
+	padding-bottom: 2em;
+	margin-bottom: 0.5em;
+}
+
+#welcome #hero {
+	background-color: $black;
+}
+
+#welcome #hero h1 {
+	margin-top: 2em;
+	color: darken($orange, 0%);
+}
+
+#welcome #hero h2 {
+	color: lighten($black, 10%);
+}
+
+#welcome #about {
+	background: url(<%= image_url("backgrounds/background1-1024x680.jpg") %>);
+	background-size: cover;
+	background-position: right top;
+}
+
+#welcome #about h2 {
+	color: darken($orange, 0%);
+  text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #about p {
+	color: darken($white, 10%);
+  text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #about ul {
+	color: darken($white, 10%);
+  text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #talent {
+	background-color: darken($grey, 50%);
+	text-align: center;
+}
+
+#welcome #talent h2 {
+	color: darken($orange, 0%);
+	text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #talent p {
+	color: darken($black, 0%);
+	text-shadow: 1px 1px 1px $shadow_black;
+}
+
+#welcome #talent p strong {
+	color: darken($white, 0%);
+	padding: 0.15em 0.25em 0.15em 0.25em;
+	background: rgba(0,0,0,0.2);
+}
+
+#welcome #talent ul li img.photo {
+	border: 2px solid $black;
+}
+
+#welcome #team {
+	background: url(<%= image_url("backgrounds/background2-1024x680.jpg") %>);
+	background-size: cover;
+	background-position: right top;
+}
+
+#welcome #team h2 {
+	color: darken($orange, 0%);
+	text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #team p {
+	color: lighten($white, 10%);
+	text-shadow: 1px 1px 1px $shadow_black;
+}
+
+#welcome #team p strong {
+	color: darken($white, 0%);
+	padding: 0.15em 0.25em 0.15em 0.25em;
+	background: rgba(0,0,0,0.2);
+}
+
+#welcome #contact {
+	background: url(<%= image_url("backgrounds/background3-1024x680.jpg") %>);
+	background-size: cover;
+	background-position: right top;
+}
+
+#welcome #contact h2 {
+	color: darken($orange, 0%);
+	text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #contact p {
+	color: darken($black, 0%);
+	text-shadow: 1px 1px 1px $shadow_black;
+}
+
+#welcome #contact p strong {
+	color: darken($white, 0%);
+	padding: 0.15em 0.25em 0.15em 0.25em;
+	background: rgba(0,0,0,0.2);
+}
+
+
+
+
+/*
+	Ref: http://foundation.zurb.com/docs/media-queries.html
+	max-width 640px, mobile-only styles, use when QAing mobile issues
+*/
+@media only screen and (max-width: 40em) {
+	#welcome #hero h1,
+	#welcome #hero h2 {
+		text-align: center;
+	}
+
+	#welcome #about h2 {
+	}
+
+	#welcome #about p {
+		font-size: 1em;
+	}
+
+	#welcome #team {
+		background: url(<%= image_url("backgrounds/background2-1024x680.jpg") %>);
+		background-size: cover;
+		background-position: 80% 0%;
+	}
+
+	#welcome #team h2 {
+		text-align: right;
+	}
+
+	#welcome #team p {
+
+		text-align: right;
+	}
+
+	#welcome #contact h2 {
+		text-align: right;
+	}
+
+	#welcome #contact p {
+		text-align: right;
+	}
+}
+
+
+/*
+	Ref: http://foundation.zurb.com/docs/media-queries.html
+	min-width 1025px, large screens
+*/
+@media only screen and (min-width: 64.063em) {
+	#welcome #hero .title {
+		text-align: right;
+	}
+
+	#welcome #hero h1 {
+		margin-top: 4.8em;
+	}
+
+	#welcome #hero h2 {
+		font-size: 1.4em;
+	}
+
+	#welcome #about h2 {
+		color: darken($orange, 0%);
+		font-size: 3em;
+	}
+
+	#welcome #about p {
+		color: darken($white, 10%);
+		font-size: 1em;
+	}
+}

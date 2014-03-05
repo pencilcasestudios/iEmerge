@@ -3,11 +3,11 @@ en:
     developer:
       name: "Pencil Case Studios"
     meta_tags:
-      description: "iEmerge Agency"
+      description: "iEmerge"
       keywords: "talent, modelling, model, iemerge, agency, zambia, jacklyn, nelly, miyanda"
-    name: "iEmerge Agency"
+    name: "iEmerge"
     owner:
-      name: "iEmerge Agency"
+      name: "iEmerge"
     tagline_html: "A Leading Zambian Talent Agency"
 
 
@@ -22,6 +22,69 @@ en:
   views:
     welcome:
       index:
+        copy:
+          about_html: |
+            <h2>About iEmerge</h2>
+            <p>iEmerge Agency scouts for unique Zambian talent in modeling, photography, dance, fashion and design. Our vision is to become Zambia&rsquo;s first choice for talent management and we plan to grow to serve the entire region of Southern Africa.</p>
+            <p>Since establishment in January 2011, iEmerge has worked with several organisations and projects including:</p>
+            <ul>
+              <li>Cavendish University Zambia&mdash;Our models featured on the cover of the graduation booklet</li>
+              <li>Kutowa Designs&mdash;Model management for the luanch of Kutwa&rsquo;s Yatatu line</li>
+              <li>Attitude Magazine</li>
+              <li>JSW jewellary Fashion Show</li>
+              <li>Inzy Photography</li>
+              <li>FiahLink Photography</li>
+              <li>Miss Southern Africa International 2011</li>
+            </ul>
+            <p>The agency&rsquo;s role is to secure talent people and allow them to blossom in their areas of interest. We help young talent to get exposure to the industry and groom them to have confidence, poise and attitude.</p>
+          contact_html: |
+            <h2>Contact iEmerge</h2>
+            <p>
+              <strong>Phone</strong><br />
+              <a href="tel:0978987562">097 898 7562</a><br />
+              <a href="tel:0977755329">097 775 5329</a>
+            </p>
+            <p>
+              <strong>Email</strong><br />
+              <a href="mailto:hello@iemergeagency.co.zm">hello@iemergeagency.co.zm</a>
+            </p>
+            <p>
+              <strong>Twitter</strong><br />
+              <a href="http://twitter.com/iemergeagency">@iemergeagency</a>
+            </p>
+            <p>
+              <strong>Facebook</strong><br />
+              <a href="http://facebook.com/iemergeagency">iemergeagency</a>
+            </p>
+            <p>
+              <strong>Website</strong><br />
+              <a href="http://iemergeagency.co.zm">iemergeagency.co.zm</a>
+            </p>
+          talent_html: |
+            <h2>Talent</h2>
+          team_html: |
+            <h2>Our Team</h2>
+            <p>
+              <strong>Director and Chief Executive Officer</strong><br />
+              Jacklyn Nyaywa
+            </p>
+            <p>
+              <strong>Director of Marketing and Public Relations</strong><br />
+              Nelia Musazulwa
+            </p>
+            <p>
+              <strong>Director of Logistics and Planning</strong><br />
+              Chayi Chabakale
+            </p>
+            <p>
+              <strong>Director of Finance and Accounting</strong><br />
+              Lusako Sichali
+            </p>
+            <p>
+              <strong>Assistant</strong><br />
+              Lwiza Musazulwa
+            </p>
         headings:
           welcome: "iEmerge"
           talent_agency: "A Leading Zambian Talent Agency"
+        title: "A Leading Zambian Talent Agency"

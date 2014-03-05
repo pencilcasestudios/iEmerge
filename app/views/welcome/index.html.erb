@@ -2,12 +2,62 @@
 
 <section id="hero">
 	<div class="row">
-		<div class="medium-6 columns">
-		<h1><%= t("views.welcome.index.headings.welcome") %></h1>
-		<h2><%= t("views.welcome.index.headings.talent_agency") %></h2>
-		</div>
-		<div class="medium-6 columns">
+		<div class="medium-6 columns title">
+			<h1><%= t("views.welcome.index.headings.welcome") %></h1>
+			<h2><%= t("views.welcome.index.headings.talent_agency") %></h2>
+		</div><!-- /.medium-# columns title -->
+		<div class="medium-6 columns logo">
 			<%= image_tag("logos/iemerge_agency_logo_black-400x400.png") %>
+		</div><!-- /.medium-# columns logo -->
+	</div><!-- /.row -->
+</section><!-- /#hero -->
+
+
+
+
+<section id="about">
+	<div class="row">
+		<div class="medium-6 columns">
+			<%= t("views.welcome.index.copy.about_html") %>
+		</div><!-- /.medium-# columns -->
+	</div><!-- /.row -->
+</section><!-- /#about -->
+
+
+
+
+<section id="talent">
+	<div class="row">
+		<div class="medium-12 columns">
+			<%= t("views.welcome.index.copy.talent_html") %>
+		</div><!-- /.medium-# columns -->
+	</div><!-- /.row -->
+
+	<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-6">
+		<% for index in 1..12 do %>
+			<li><%= image_tag("models/model#{ index }.jpg", class: "photo")  %></li>
+		<% end %>
+	</ul>
+</section><!-- /#talent -->
+
+
+
+
+<section id="team">
+	<div class="row">
+		<div class="small-9 small-offset-3 medium-3 medium-offset-9 columns">
+			<%= t("views.welcome.index.copy.team_html") %>
+		</div>
+	</div>
+</section>
+
+
+
+
+<section id="contact">
+	<div class="row">
+		<div class="medium-5 medium-offset-7 columns">
+			<%= t("views.welcome.index.copy.contact_html") %>
 		</div>
 	</div>
 </section>
