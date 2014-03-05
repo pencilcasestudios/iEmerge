@@ -30,7 +30,7 @@ gem "uglifier"#, ">= 1.3.0"
 group :test, :development do
 	# gem "debugger", group: [:development, :test]
   #gem "rb-inotify"
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 3.0.0.beta"
   gem "sqlite3"
 end
 
