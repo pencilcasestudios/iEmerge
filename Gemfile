@@ -45,7 +45,7 @@ group :test do
   gem "capybara"
   gem "factory_girl_rails"
   gem "guard-bundler"
-  gem "guard-rspec"
+  gem "guard-rspec", require: false
   gem "guard-spork"
   gem "launchy" # Ref: http://techiferous.com/2010/04/using-capybara-in-rails-3/ for save_and_open_page to work
   gem "spork-rails"
