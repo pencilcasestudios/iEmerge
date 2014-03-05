@@ -1,2 +1,13 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<% title t("views.welcome.index.title") %>
+
+<section id="hero">
+	<div class="row">
+		<div class="medium-6 columns">
+		<h1><%= t("views.welcome.index.headings.welcome") %></h1>
+		<h2><%= t("views.welcome.index.headings.talent_agency") %></h2>
+		</div>
+		<div class="medium-6 columns">
+			<%= image_tag("logos/iemerge_agency_logo_black-400x400.png") %>
+		</div>
+	</div>
+</section>

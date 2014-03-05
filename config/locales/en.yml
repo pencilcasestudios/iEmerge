@@ -8,4 +8,20 @@ en:
     name: "iEmerge Agency"
     owner:
       name: "iEmerge Agency"
-    tagline_html: "iEmerge Agency"
+    tagline_html: "A Leading Zambian Talent Agency"
+
+
+
+
+
+
+
+
+
+# Views
+  views:
+    welcome:
+      index:
+        headings:
+          welcome: "iEmerge"
+          talent_agency: "A Leading Zambian Talent Agency"

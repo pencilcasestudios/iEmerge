@@ -7,6 +7,10 @@ describe "Assets" do
       get "/assets/styles.css"
       expect(response).to be_success
       expect(response.status).to eq(200)
+
+      get "/assets/welcome.css"
+      expect(response).to be_success
+      expect(response.status).to eq(200)
     end
   end
 
