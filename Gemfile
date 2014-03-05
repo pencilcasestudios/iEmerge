@@ -8,12 +8,19 @@ gem "rails", "~> 4.0.2"
 
 
 
-# gem "bcrypt-ruby", "~> 3.1.2"	# Use ActiveModel has_secure_password
+#gem "bcrypt-ruby", "~> 3.1.2" # Use ActiveModel has_secure_password
+#gem "cancan"
+#gem "delayed_job_active_record"
+#gem "nested_form"
+#gem "paper_trail"
+#gem "state_machine"
 gem "coffee-rails"#, "~> 4.0.0"
 gem "foundation-rails"
 gem "jbuilder"#, "~> 1.2"
 gem "jquery-rails"
+gem "meta-tags", require: "meta_tags"
 gem "sass-rails"#, "~> 4.0.0"
+gem "settingslogic"
 gem "turbolinks"
 gem "uglifier"#, ">= 1.3.0"
 
@@ -22,7 +29,7 @@ gem "uglifier"#, ">= 1.3.0"
 
 group :test, :development do
 	# gem "debugger", group: [:development, :test]
-  gem "rb-inotify"
+  #gem "rb-inotify"
   gem "rspec-rails"
   gem "sqlite3"
 end
