@@ -48,6 +48,7 @@ group :test do
   gem "guard-rspec", require: false
   gem "guard-spork"
   gem "launchy" # Ref: http://techiferous.com/2010/04/using-capybara-in-rails-3/ for save_and_open_page to work
+  gem "rspec", "~> 3.0.0.beta2"
   gem "spork-rails"
 end
 
