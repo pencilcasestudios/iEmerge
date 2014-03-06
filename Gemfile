@@ -35,9 +35,10 @@ group :test, :development do
 end
 
 group :development do
-	gem "capistrano"
-	gem "letter_opener"
-	gem "rvm1-capistrano3", require: false
+  gem "capistrano",  "~> 3.1"
+  gem "capistrano-rails", "~> 1.1"
+  gem "letter_opener"
+  gem "rvm1-capistrano3", require: false
 end
 
 group :test do
