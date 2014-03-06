@@ -103,6 +103,6 @@ end
 before "deploy", "rvm1:install:rvm"  # install/update RVM
 
 # Synchronise assets
-before "deploy:assets:precompile", "deploy:sync_assets"
+before "deploy:compile_assets", "deploy:sync_assets"
 
 after "deploy:publishing", "deploy:restart"
