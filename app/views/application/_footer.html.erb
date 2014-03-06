@@ -8,8 +8,12 @@
 		</div><!-- /.medium-# columns -->
 		<div class="small-8 columns">
 			<p>
-				&copy; <%= Time.now.year %> <%= link_to t("application.owner.name"), root_path %><br />
-				Website by Pencil Case Studios
+				<%= t("views.application._footer.copy.website_by") %>
+				<%= link_to t("application.developer.name"), t("application.developer.url") %><br />
+
+				&copy;
+				<%= Time.now.year %>
+				<%= link_to t("application.owner.name"), root_path %><br />
 			</p>
 		</div><!-- /.medium-# columns -->
 	</div><!-- /.row -->

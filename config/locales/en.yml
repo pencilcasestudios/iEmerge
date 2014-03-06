@@ -2,6 +2,7 @@ en:
   application:
     developer:
       name: "Pencil Case Studios"
+      url: "http://pencilcasestudios.com"
     meta_tags:
       description: "iEmerge"
       keywords: "talent, modelling, model, iemerge, agency, zambia, jacklyn, nelly, miyanda"
@@ -20,6 +21,10 @@ en:
 
 # Views
   views:
+    application:
+      _footer:
+        copy:
+          website_by: "Website by"
     welcome:
       index:
         copy:
