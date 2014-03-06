@@ -6,15 +6,15 @@ lock "3.1.0"
 
 # Deployment dependencies
 # Ref: https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks#deploycheck
-depend :remote, :command, "bundle"  # Bundler
-depend :remote, :command, "convert" # ImageMagick
-depend :remote, :command, "git"     # Git
-depend :remote, :command, "mysql"   # MariaDB
-depend :remote, :command, "node"    # nodejs
-depend :remote, :command, "rake"    # Rake
-depend :remote, :command, "rvm"     # RVM
-depend :remote, :gem, "bundler", "#{DEPLOYMENT_CONFIG["miniumum_version_of_bundler"]}"
-depend :remote, :gem, "rake", "#{DEPLOYMENT_CONFIG["miniumum_version_of_rake"]}"
+#depend :remote, :command, "bundle"  # Bundler
+#depend :remote, :command, "convert" # ImageMagick
+#depend :remote, :command, "git"     # Git
+#depend :remote, :command, "mysql"   # MariaDB
+#depend :remote, :command, "node"    # nodejs
+#depend :remote, :command, "rake"    # Rake
+#depend :remote, :command, "rvm"     # RVM
+#depend :remote, :gem, "bundler", "#{DEPLOYMENT_CONFIG["miniumum_version_of_bundler"]}"
+#depend :remote, :gem, "rake", "#{DEPLOYMENT_CONFIG["miniumum_version_of_rake"]}"
 
 
 
