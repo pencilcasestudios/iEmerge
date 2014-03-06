@@ -5,7 +5,7 @@ set :deploy_to, "#{fetch(:applications_folder)}/#{fetch(:application)}/#{fetch(:
 
 # Don't forget to make this repo on the server
 set :repository_server_name, DEPLOYMENT_CONFIG["production_server_name"]
-set :repo_url, "#{fetch(:user)}@#{repository_server_name}:/var/Repositories/Git/#{fetch(:application)}.git"
+set :repo_url, "#{fetch(:user)}@#{fetch(:repository_server_name)}:/var/Repositories/Git/#{fetch(:application)}.git"
 # Don't forget to make this branch in the repository
 set :branch, DEPLOYMENT_CONFIG["production_repository_deployment_branch"]
 
