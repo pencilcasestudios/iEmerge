@@ -276,7 +276,7 @@ git checkout master
 git merge dev
 git push
 git push virtual # May need to 'git push virtual master'
-cap staging rvm1:install:rvm
+cap virtual rvm1:install:rvm
 cap virtual deploy:setup_asset_vault
 cap virtual deploy:check # Update configuration files and create the database after this
 
