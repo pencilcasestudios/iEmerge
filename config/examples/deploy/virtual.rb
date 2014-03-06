@@ -32,9 +32,10 @@ namespace :deploy do
     end
 
     # Copy assets from the AssetsVault to the shared assets path for the deployed application
-    on roles(:all) do
-	    execute "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/ #{fetch(:shared_path)}/images/"
-  	  execute "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/ #{fetch(:shared_path)}/pdfs/"
+    on roles(:app) do
+      # Execute rsync to synchronise assets from the AssetsVault
+      %x("rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/ #{fetch(:shared_path)}/images/")
+      %x("rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/ #{fetch(:shared_path)}/pdfs/")
   	end
   end
 end

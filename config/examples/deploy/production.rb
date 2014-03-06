@@ -26,11 +26,16 @@ namespace :deploy do
   desc "Synchronise assets"
   task :sync_assets do
     # Upload assets to the AssetsVault
-    run_locally "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded ~/Projects/Rails/Galaunia/app/assets/images/ #{fetch(:deploy_user)}@#{DEPLOYMENT_CONFIG["production_server_name"]}:#{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
-    run_locally "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded ~/Projects/Rails/Galaunia/app/assets/pdfs/ #{fetch(:deploy_user)}@#{DEPLOYMENT_CONFIG["production_server_name"]}:#{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
+    run_locally do
+    	execute "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded ~/Projects/Rails/#{fetch(:application)}/app/assets/images/ #{fetch(:deploy_user)}@#{DEPLOYMENT_CONFIG["production_server_name"]}:#{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
+    	execute "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded ~/Projects/Rails/#{fetch(:application)}/app/assets/pdfs/ #{fetch(:deploy_user)}@#{DEPLOYMENT_CONFIG["production_server_name"]}:#{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
+    end
 
     # Copy assets from the AssetsVault to the shared assets path for the deployed application
-    run "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/ #{fetch(:shared_path)}/images/"
-    run "rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/ #{fetch(:shared_path)}/pdfs/"
+    on roles(:app) do
+      # Execute rsync to synchronise assets from the AssetsVault
+      %x("rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/ #{fetch(:shared_path)}/images/")
+      %x("rsync --verbose --stats --progress --compress --archive --partial --recursive --times --perms --links --delete --exclude '.*' --delete-excluded #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/ #{fetch(:shared_path)}/pdfs/")
+  	end
   end
 end
