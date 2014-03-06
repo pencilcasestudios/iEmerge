@@ -5,7 +5,7 @@ set :deploy_to, "#{applications_folder}/#{application}/#{deployment_path}"
 
 # Don't forget to make this repo on the server
 set :repository_server_name, DEPLOYMENT_CONFIG["staging_server_name"]
-set :repository, "#{user}@#{repository_server_name}:/var/Repositories/Git/#{application}.git"
+set :repo_url, "#{user}@#{repository_server_name}:/var/Repositories/Git/#{application}.git"
 # Don't forget to make this branch in the repository
 set :branch, DEPLOYMENT_CONFIG["staging_repository_deployment_branch"]
 
