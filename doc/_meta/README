@@ -275,6 +275,7 @@ git checkout master
 git merge dev
 git push
 git push virtual # May need to 'git push virtual master'
+cap virtual deploy:setup_asset_vault
 cap virtual deploy:check # Update configuration files and create the database after this
 
 # From the virtual machine (as the deploy user)
@@ -473,6 +474,7 @@ git checkout master
 git merge dev
 git push
 git push staging # May need to 'git push staging master'
+cap staging deploy:setup_asset_vault
 cap staging deploy:check # Update configuration files and create the database after this
 
 # From the staging machine (as the deploy user)
@@ -673,6 +675,7 @@ git checkout master
 git merge dev
 git push
 git push production # May need to 'git push production master'
+cap production deploy:setup_asset_vault
 cap production deploy:check # Update configuration files and create the database after this
 
 # From the production machine (as the deploy user)
