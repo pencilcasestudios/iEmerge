@@ -282,6 +282,7 @@ cap virtual deploy:check # Update configuration files and create the database af
 
 # From the virtual machine (as the deploy user)
 # After running cap virtual deploy:check
+ssh deploy@rails.vm
 cd ~/Projects/Configurations/iEmerge/virtual
 cp *.yml /var/Apps/iEmerge/virtual/shared/config/
 
@@ -484,6 +485,7 @@ cap staging deploy:check # Update configuration files and create the database af
 
 # From the staging machine (as the deploy user)
 # After running cap staging deploy:check
+ssh deploy@genesis.vps
 cd ~/Projects/Configurations/iEmerge/staging
 cp *.yml /var/Apps/iEmerge/staging/shared/config/
 
@@ -686,6 +688,7 @@ cap production deploy:check # Update configuration files and create the database
 
 # From the production machine (as the deploy user)
 # After running cap production deploy:check
+ssh deploy@deuteronomy.vps
 cd ~/Projects/Configurations/iEmerge/production
 cp *.yml /var/Apps/iEmerge/production/shared/config/
 
