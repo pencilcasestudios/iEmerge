@@ -8,9 +8,10 @@ cp config/examples/config/config.yml config # Setup the configuration files
 cp config/examples/deploy.rb config # Setup the capistrano deployment recipe
 cp config/examples/deploy/*.rb config/deploy # Setup deployment stage configuration
 
-Link externalised assets:
+# Link externalised assets:
 cd ~/Projects/Clients/iEmerge/app/assets
 ln -nfs ~/Dropbox/iEmerge\ Office/Repositories/Images/ images
+ln -nfs ~/Dropbox/iEmerge\ Office/Repositories/PDFs/ pdfs
 
 # Set up the hosts (/etc/hosts)
 # 127.0.0.1	iemerge.dev		www.iemerge.dev

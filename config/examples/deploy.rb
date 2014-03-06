@@ -21,17 +21,11 @@ lock "3.1.0"
 
 set :application, DEPLOYMENT_CONFIG["application_name"]
 set :applications_folder, DEPLOYMENT_CONFIG["applications_folder"]
+set :deploy_user, DEPLOYMENT_CONFIG["deploy_user"]
 set :gemset_name, DEPLOYMENT_CONFIG["gemset_name"]
 set :rvm1_ruby_version, DEPLOYMENT_CONFIG["ruby_version"]
 set :rvm_ruby_gemset, "#{fetch(:rvm1_ruby_version)}@#{fetch(:gemset_name)}"
 set :rvm_ruby_string, "#{fetch(:rvm_ruby_gemset)}"
-
-set :deploy_user, DEPLOYMENT_CONFIG["user"]
-set :user, DEPLOYMENT_CONFIG["user"]
-
-
-
-
 set :scm, :git
 set :use_sudo, false
 
@@ -39,6 +33,7 @@ set :use_sudo, false
 
 
 set :asset_vault_path, DEPLOYMENT_CONFIG["asset_vault_path"]
+
 
 set :linked_dirs, %w{
   app/assets/images
@@ -52,16 +47,16 @@ set :linked_dirs, %w{
   vendor/bundle
 }
 
+
 set :linked_files, %w{
   config/config.yml
   config/database.yml
 }
 
+
 # https://github.com/collectiveidea/delayed_job/wiki/Delayed-Job-tasks-for-Capistrano-3
-set :delayed_job_server_role, :worker
-set :delayed_job_args, "-n 2"
-
-
+#set :delayed_job_server_role, :worker
+#set :delayed_job_args, "-n 2"
 
 
 namespace :deploy do
@@ -71,8 +66,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join("tmp/restart.txt")
-
-      invoke "delayed_job:restart"
+      execute :touch, release_path.join("tmp/restart.txt")
     end
   end
 
@@ -89,17 +83,26 @@ namespace :deploy do
 
   desc "Set up externalised asset folders."
   task :setup_asset_vault do
-    puts "Creating asset folders in #{fetch(:asset_vault_path)}/#{fetch(:application)}"
+    on roles(:all) do
+      puts "Create asset folders in #{fetch(:asset_vault_path)}/#{fetch(:application)}"
 
-    run "mkdir -p #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
-    run "mkdir -p #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
+      execute "mkdir -p #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
+      execute "mkdir -p #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
 
-    run "chown -R #{fetch(:user)}:#{fetch(:user)} #{fetch(:asset_vault_path)}"
+      execute "chown -R #{fetch(:deploy_user)}:#{fetch(:deploy_user)} #{fetch(:asset_vault_path)}"
+    end
   end
 
 end
 
 
 
+
+# Hooks
+# Ref: https://github.com/rvm/rvm1-capistrano3
+before "deploy", "rvm1:install:rvm"  # install/update RVM
+
+# Synchronise assets
+before "deploy:assets:precompile", "deploy:sync_assets"
 
 after "deploy:publishing", "deploy:restart"
