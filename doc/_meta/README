@@ -275,19 +275,15 @@ git checkout master
 git merge dev
 git push
 git push virtual # May need to 'git push virtual master'
-cap virtual deploy:setup # Update configuration files and create the database after this
+cap virtual deploy:check # Update configuration files and create the database after this
 
 # From the virtual machine (as the deploy user)
-# After running cap virtual deploy:setup
+# After running cap virtual deploy:check
 cd ~/Projects/Configurations/iEmerge/virtual
 cp *.yml /var/Apps/iEmerge/virtual/shared/config/
 
 cap virtual deploy:check
-cap virtual deploy:update
-# Create databases
-cap virtual deploy:migrate
-cap virtual db:seed
-cap virtual deploy:start
+cap virtual deploy
 
 
 # After deploying the app
@@ -477,19 +473,15 @@ git checkout master
 git merge dev
 git push
 git push staging # May need to 'git push staging master'
-cap staging deploy:setup # Update configuration files and create the database after this
+cap staging deploy:check # Update configuration files and create the database after this
 
 # From the staging machine (as the deploy user)
-# After running cap staging deploy:setup
+# After running cap staging deploy:check
 cd ~/Projects/Configurations/iEmerge/staging
 cp *.yml /var/Apps/iEmerge/staging/shared/config/
 
 cap staging deploy:check
-cap staging deploy:update
-# Create databases
-cap staging deploy:migrate
-cap staging db:seed
-cap staging deploy:start
+cap staging deploy
 
 
 # After deploying the app
@@ -681,19 +673,15 @@ git checkout master
 git merge dev
 git push
 git push production # May need to 'git push production master'
-cap production deploy:setup # Update configuration files and create the database after this
+cap production deploy:check # Update configuration files and create the database after this
 
 # From the production machine (as the deploy user)
-# After running cap production deploy:setup
+# After running cap production deploy:check
 cd ~/Projects/Configurations/iEmerge/production
 cp *.yml /var/Apps/iEmerge/production/shared/config/
 
 cap production deploy:check
-cap production deploy:update
-# Create databases
-cap production deploy:migrate
-cap production db:seed
-cap production deploy:start
+cap production deploy
 
 
 # After deploying the app
