@@ -71,7 +71,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join("tmp/restart.txt")
 
-      invoke 'delayed_job:restart'
+      invoke "delayed_job:restart"
     end
   end
 
@@ -86,15 +86,6 @@ namespace :deploy do
     end
   end
 
-  desc "Setup shared directory."
-  task :setup_shared do
-    run "mkdir #{shared_path}/config"
-    put File.read("config/examples/config/config.yml"), "#{shared_path}/config/config.yml"
-    put File.read("config/examples/database/database.yml"), "#{shared_path}/config/database.yml"
-    #put File.read("config/examples/twitter.yml"), "#{shared_path}/config/twitter.yml"
-    puts "Please edit the config files in #{shared_path}/config."
-  end
-
   desc "Set up externalised asset folders."
   task :setup_asset_vault do
     puts "Creating asset folders in #{asset_vault_path}/#{application}"
@@ -105,22 +96,9 @@ namespace :deploy do
     run "chown -R #{user}:#{user} #{asset_vault_path}"
   end
 
-  desc "Symlink extra configs and folders."
-  task :symlink_extras do
-    run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    #run "ln -nfs #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
-  end
 end
 
 
 
 
-# Synchronise assets
-before "deploy:assets:precompile", "deploy:sync_assets"
-
-
-
-
-
-after 'deploy:publishing', 'deploy:restart'
+after "deploy:publishing", "deploy:restart"
