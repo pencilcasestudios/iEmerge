@@ -1,5 +1,5 @@
 # Ref: http://gist.github.com/293302
-server DEPLOYMENT_CONFIG["staging_server_name"], user: DEPLOYMENT_CONFIG["user"], roles: [:web, :app, :db]
+server DEPLOYMENT_CONFIG["staging_server_name"], roles: [:web, :app, :db]
 set :deployment_path, DEPLOYMENT_CONFIG["staging_deployment_path"]
 set :deploy_to, "#{fetch(:applications_folder)}/#{fetch(:application)}/#{fetch(:deployment_path)}"
 
@@ -8,6 +8,8 @@ set :repository_server_name, DEPLOYMENT_CONFIG["staging_server_name"]
 set :repo_url, "#{fetch(:user)}@#{fetch(:repository_server_name)}:/var/Repositories/Git/#{fetch(:application)}.git"
 # Don't forget to make this branch in the repository
 set :branch, DEPLOYMENT_CONFIG["staging_repository_deployment_branch"]
+
+set :rails_env, :production
 
 
 
