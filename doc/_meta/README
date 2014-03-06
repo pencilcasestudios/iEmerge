@@ -271,10 +271,12 @@ mv config.yml ~/Projects/Configurations/iEmerge/virtual/
 # From the development machine
 # Capistrano steps for initial deployment
 # VIRTUAL MACHINE DEPLOYMENT
+cd ~/Projects/Clients/iEmerge/
 git checkout master
 git merge dev
 git push
 git push virtual # May need to 'git push virtual master'
+cap staging rvm1:install:rvm
 cap virtual deploy:setup_asset_vault
 cap virtual deploy:check # Update configuration files and create the database after this
 
@@ -431,6 +433,7 @@ grant all on iEmerge_staging_development.* to 'iemerge'@'localhost';
 grant all on iEmerge_staging_test.* to 'iemerge'@'localhost';
 
 # Setup the MariaDB database:
+ssh deploy@genesis.vps
 mysql -u iemerge -p
 create database iEmerge_staging;
 create database iEmerge_staging_development;
@@ -470,10 +473,12 @@ mv config.yml ~/Projects/Configurations/iEmerge/staging/
 # From the development machine
 # Capistrano steps for initial deployment
 # STAGING MACHINE DEPLOYMENT
+cd ~/Projects/Clients/iEmerge
 git checkout master
 git merge dev
 git push
 git push staging # May need to 'git push staging master'
+cap staging rvm1:install:rvm
 cap staging deploy:setup_asset_vault
 cap staging deploy:check # Update configuration files and create the database after this
 
@@ -675,6 +680,7 @@ git checkout master
 git merge dev
 git push
 git push production # May need to 'git push production master'
+cap production rvm1:install:rvm
 cap production deploy:setup_asset_vault
 cap production deploy:check # Update configuration files and create the database after this
 
