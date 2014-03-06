@@ -13,7 +13,7 @@ cd ~/Projects/Clients/iEmerge/app/assets
 ln -nfs ~/Dropbox/iEmerge\ Office/Repositories/Images/ images
 
 # Set up the hosts (/etc/hosts)
-# 127.0.0.1	iemergeagency.dev		www.iemergeagency.dev
+# 127.0.0.1	iemerge.dev		www.iemerge.dev
 
 # Setup deployment references:
 git remote add virtual deploy@rails.vm:/var/Repositories/Git/iEmerge.git
@@ -52,21 +52,6 @@ rake jobs:work # In another terminal window - to run delayed job
 
 cd ~/Projects/Clients/iEmerge
 rails console # In another terminal window - to manage administrators
-
-
-
-
-# Administration
-#===============
-# Creating an administrator
-# In the Rails console, select the user:
-u = User.first
-u.admin?
-
-# Promote the user to administrator
-u.promote
-u.save
-u.admin?
 
 
 
@@ -198,14 +183,14 @@ sudo chown -R deploy:deploy /var/AssetsVault
 # Configure nginx
 # On the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/nginx
-scp nginx.iemergeagency.virtual.conf vladimir@rails.vm:~/iemergeagency.virtual.conf
+scp nginx.iemerge.virtual.conf vladimir@rails.vm:~/iemerge.virtual.conf
 
 
 # On the virtual machine
 # Set up the nginx configuration
 ssh vladimir@rails.vm
-sudo mv ~/iemergeagency.virtual.conf /etc/nginx/sites-available
-sudo ln -nfs /etc/nginx/sites-available/iemergeagency.virtual.conf /etc/nginx/sites-enabled/iemergeagency.virtual
+sudo mv ~/iemerge.virtual.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemerge.virtual.conf /etc/nginx/sites-enabled/iemerge.virtual
 
 
 # Generate an SSL certificate and key:
@@ -213,25 +198,25 @@ sudo mkdir -p /etc/nginx/ssl
 cd /etc/nginx/ssl
 sudo mkdir -p iEmerge
 cd iEmerge
-sudo openssl genrsa -des3 -out iemergeagency.virtual.key 1024
+sudo openssl genrsa -des3 -out iemerge.virtual.key 1024
 
-# pass phrase: iemergeagency
+# pass phrase: iemerge
 
-sudo openssl req -new -key iemergeagency.virtual.key -out iemergeagency.virtual.csr
+sudo openssl req -new -key iemerge.virtual.key -out iemerge.virtual.csr
 
 # Country Name: ZM
 # Province: Lusaka Province
 # Locality Name: Lusaka
-# Organisation Name: iEmerge Farms
+# Organisation Name: iEmerge Agency
 # Orgnisational Unit Name: <Blank>
-# Common Name: iemergeagency.virtual.
+# Common Name: iemerge.virtual.
 # Email: itsupport@pencilcasestudios.com
 # Challenge password: <Blank>
 # Optional Company Name: <Blank>
 
-sudo cp iemergeagency.virtual.key iemergeagency.virtual.key.original
-sudo openssl rsa -in iemergeagency.virtual.key.original -out iemergeagency.virtual.key
-sudo openssl x509 -req -days 365 -in iemergeagency.virtual.csr -signkey iemergeagency.virtual.key -out iemergeagency.virtual.crt
+sudo cp iemerge.virtual.key iemerge.virtual.key.original
+sudo openssl rsa -in iemerge.virtual.key.original -out iemerge.virtual.key
+sudo openssl x509 -req -days 365 -in iemerge.virtual.csr -signkey iemerge.virtual.key -out iemerge.virtual.crt
 
 
 # Test the nginx configuration:
@@ -243,13 +228,13 @@ sudo service nginx reload
 # Setup the MariaDB database user:
 ssh vladimir@rails.vm
 mysql -u root -p
-create user 'iemergeagency'@'localhost' identified by 'VirtualiEmergePassword';
-grant all on iEmerge_virtual.* to 'iemergeagency'@'localhost';
-grant all on iEmerge_virtual_development.* to 'iemergeagency'@'localhost';
-grant all on iEmerge_virtual_test.* to 'iemergeagency'@'localhost';
+create user 'iemerge'@'localhost' identified by 'VirtualiEmergePassword';
+grant all on iEmerge_virtual.* to 'iemerge'@'localhost';
+grant all on iEmerge_virtual_development.* to 'iemerge'@'localhost';
+grant all on iEmerge_virtual_test.* to 'iemerge'@'localhost';
 
 # Setup the MariaDB database:
-mysql -u iemergeagency -p
+mysql -u iemerge -p
 create database iEmerge_virtual;
 create database iEmerge_virtual_development;
 create database iEmerge_virtual_test;
@@ -258,12 +243,12 @@ create database iEmerge_virtual_test;
 # Setup the Monit scripts:
 # From the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/monit
-scp delayed_job.iemergeagency.virtual.monitrc vladimir@rails.vm:~
+scp delayed_job.iemerge.virtual.monitrc vladimir@rails.vm:~
 cd ~/Projects/Clients/iEmerge
 ssh vladimir@rails.vm
 
 # From the virtual machine
-sudo mv ~/delayed_job.iemergeagency.virtual.monitrc /etc/monit/conf.d/
+sudo mv ~/delayed_job.iemerge.virtual.monitrc /etc/monit/conf.d/
 sudo service monit syntax
 
 
@@ -397,14 +382,14 @@ sudo chown -R deploy:deploy /var/AssetsVault
 # Configure nginx
 # On the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/nginx
-scp nginx.iemergeagency.clientcase.net.conf silumesii@genesis.vps:~/iemergeagency.clientcase.net.conf
+scp nginx.iemerge.clientcase.net.conf silumesii@genesis.vps:~/iemerge.clientcase.net.conf
 
 
 # On the staging machine
 # Set up the nginx configuration
 ssh silumesii@genesis.vps
-sudo mv ~/iemergeagency.clientcase.net.conf /etc/nginx/sites-available
-sudo ln -nfs /etc/nginx/sites-available/iemergeagency.clientcase.net.conf /etc/nginx/sites-enabled/iemergeagency.clientcase.net
+sudo mv ~/iemerge.clientcase.net.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemerge.clientcase.net.conf /etc/nginx/sites-enabled/iemerge.clientcase.net
 
 
 # Generate an SSL certificate and key:
@@ -412,25 +397,25 @@ sudo mkdir -p /etc/nginx/ssl
 cd /etc/nginx/ssl
 sudo mkdir -p iEmerge
 cd iEmerge
-sudo openssl genrsa -des3 -out iemergeagency.clientcase.net.key 1024
+sudo openssl genrsa -des3 -out iemerge.clientcase.net.key 1024
 
-# pass phrase: iemergeagency
+# pass phrase: iemerge
 
-sudo openssl req -new -key iemergeagency.clientcase.net.key -out iemergeagency.clientcase.net.csr
+sudo openssl req -new -key iemerge.clientcase.net.key -out iemerge.clientcase.net.csr
 
 # Country Name: ZM
 # Province: Lusaka Province
 # Locality Name: Lusaka
-# Organisation Name: iEmerge Farms
+# Organisation Name: iEmerge Agency
 # Orgnisational Unit Name: <Blank>
-# Common Name: iemergeagency.clientcase.net.
+# Common Name: iemerge.clientcase.net.
 # Email: itsupport@pencilcasestudios.com
 # Challenge password: <Blank>
 # Optional Company Name: <Blank>
 
-sudo cp iemergeagency.clientcase.net.key iemergeagency.clientcase.net.key.original
-sudo openssl rsa -in iemergeagency.clientcase.net.key.original -out iemergeagency.clientcase.net.key
-sudo openssl x509 -req -days 365 -in iemergeagency.clientcase.net.csr -signkey iemergeagency.clientcase.net.key -out iemergeagency.clientcase.net.crt
+sudo cp iemerge.clientcase.net.key iemerge.clientcase.net.key.original
+sudo openssl rsa -in iemerge.clientcase.net.key.original -out iemerge.clientcase.net.key
+sudo openssl x509 -req -days 365 -in iemerge.clientcase.net.csr -signkey iemerge.clientcase.net.key -out iemerge.clientcase.net.crt
 
 
 # Test the nginx configuration:
@@ -442,13 +427,13 @@ sudo service nginx reload
 # Setup the MariaDB database user:
 ssh silumesii@genesis.vps
 mysql -u root -p
-create user 'iemergeagency'@'localhost' identified by 'StagingiEmergePassword';
-grant all on iEmerge_staging.* to 'iemergeagency'@'localhost';
-grant all on iEmerge_staging_development.* to 'iemergeagency'@'localhost';
-grant all on iEmerge_staging_test.* to 'iemergeagency'@'localhost';
+create user 'iemerge'@'localhost' identified by 'StagingiEmergePassword';
+grant all on iEmerge_staging.* to 'iemerge'@'localhost';
+grant all on iEmerge_staging_development.* to 'iemerge'@'localhost';
+grant all on iEmerge_staging_test.* to 'iemerge'@'localhost';
 
 # Setup the MariaDB database:
-mysql -u iemergeagency -p
+mysql -u iemerge -p
 create database iEmerge_staging;
 create database iEmerge_staging_development;
 create database iEmerge_staging_test;
@@ -457,12 +442,12 @@ create database iEmerge_staging_test;
 # Setup the Monit scripts:
 # From the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/monit
-scp delayed_job.iemergeagency.clientcase.net.monitrc silumesii@genesis.vps:~
+scp delayed_job.iemerge.clientcase.net.monitrc silumesii@genesis.vps:~
 cd ~/Projects/Clients/iEmerge
 ssh silumesii@genesis.vps
 
 # From the staging machine
-sudo mv ~/delayed_job.iemergeagency.clientcase.net.monitrc /etc/monit/conf.d/
+sudo mv ~/delayed_job.iemerge.clientcase.net.monitrc /etc/monit/conf.d/
 sudo service monit syntax
 
 
@@ -599,14 +584,14 @@ sudo chown -R deploy:deploy /var/AssetsVault
 # Configure nginx
 # On the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/nginx
-scp nginx.iemergeagency.zm.conf silumesii@deuteronomy.vps:~/iemergeagency.zm.conf
+scp nginx.iemerge.zm.conf silumesii@deuteronomy.vps:~/iemerge.zm.conf
 
 
 # On the production machine
 # Set up the nginx configuration
 ssh silumesii@deuteronomy.vps
-sudo mv ~/iemergeagency.zm.conf /etc/nginx/sites-available
-sudo ln -nfs /etc/nginx/sites-available/iemergeagency.zm.conf /etc/nginx/sites-enabled/iemergeagency.zm
+sudo mv ~/iemerge.zm.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemerge.zm.conf /etc/nginx/sites-enabled/iemerge.zm
 
 
 # Generate an SSL certificate and key:
@@ -614,25 +599,25 @@ sudo mkdir -p /etc/nginx/ssl
 cd /etc/nginx/ssl
 sudo mkdir -p iEmerge
 cd iEmerge
-sudo openssl genrsa -des3 -out iemergeagency.zm.key 1024
+sudo openssl genrsa -des3 -out iemerge.zm.key 1024
 
-# pass phrase: iemergeagency
+# pass phrase: iemerge
 
-sudo openssl req -new -key iemergeagency.zm.key -out iemergeagency.zm.csr
+sudo openssl req -new -key iemerge.zm.key -out iemerge.zm.csr
 
 # Country Name: ZM
 # Province: Lusaka Province
 # Locality Name: Lusaka
-# Organisation Name: iEmerge Farms
+# Organisation Name: iEmerge Agency
 # Orgnisational Unit Name: <Blank>
-# Common Name: iemergeagency.zm.
+# Common Name: iemerge.zm.
 # Email: itsupport@pencilcasestudios.com
 # Challenge password: <Blank>
 # Optional Company Name: <Blank>
 
-sudo cp iemergeagency.zm.key iemergeagency.zm.key.original
-sudo openssl rsa -in iemergeagency.zm.key.original -out iemergeagency.zm.key
-sudo openssl x509 -req -days 365 -in iemergeagency.zm.csr -signkey iemergeagency.zm.key -out iemergeagency.zm.crt
+sudo cp iemerge.zm.key iemerge.zm.key.original
+sudo openssl rsa -in iemerge.zm.key.original -out iemerge.zm.key
+sudo openssl x509 -req -days 365 -in iemerge.zm.csr -signkey iemerge.zm.key -out iemerge.zm.crt
 
 
 # Test the nginx configuration:
@@ -644,14 +629,14 @@ sudo service nginx reload
 # Setup the MariaDB database user:
 ssh silumesii@deuteronomy.vps
 mysql -u root -p
-create user 'iemergeagency'@'localhost' identified by 'ProductioniEmergePassword';
-grant all on iEmerge_production.* to 'iemergeagency'@'localhost';
-grant all on iEmerge_production_development.* to 'iemergeagency'@'localhost';
-grant all on iEmerge_production_test.* to 'iemergeagency'@'localhost';
+create user 'iemerge'@'localhost' identified by 'ProductioniEmergePassword';
+grant all on iEmerge_production.* to 'iemerge'@'localhost';
+grant all on iEmerge_production_development.* to 'iemerge'@'localhost';
+grant all on iEmerge_production_test.* to 'iemerge'@'localhost';
 
 # Setup the MariaDB database:
 ssh deploy@deuteronomy.vps
-mysql -u iemergeagency -p
+mysql -u iemerge -p
 create database iEmerge_production;
 create database iEmerge_production_development;
 create database iEmerge_production_test;
@@ -660,12 +645,12 @@ create database iEmerge_production_test;
 # Setup the Monit scripts:
 # From the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/monit
-scp delayed_job.iemergeagency.zm.monitrc silumesii@deuteronomy.vps:~
+scp delayed_job.iemerge.zm.monitrc silumesii@deuteronomy.vps:~
 cd ~/Projects/Clients/iEmerge
 ssh silumesii@deuteronomy.vps
 
 # From the production machine
-sudo mv ~/delayed_job.iemergeagency.zm.monitrc /etc/monit/conf.d/
+sudo mv ~/delayed_job.iemerge.zm.monitrc /etc/monit/conf.d/
 sudo service monit syntax
 
 
