@@ -1,5 +1,5 @@
 # Ref: http://gist.github.com/293302
-server DEPLOYMENT_CONFIG["production_server_name"], roles: [:web, :app, :db]
+server DEPLOYMENT_CONFIG["production_server_name"], user: DEPLOYMENT_CONFIG["user"], roles: [:web, :app, :db]
 set :deployment_path, DEPLOYMENT_CONFIG["production_deployment_path"]
 set :deploy_to, "#{fetch(:applications_folder)}/#{fetch(:application)}/#{fetch(:deployment_path)}"
 
