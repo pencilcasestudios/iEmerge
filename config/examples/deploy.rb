@@ -21,11 +21,10 @@ lock "3.1.0"
 
 set :application, DEPLOYMENT_CONFIG["application_name"]
 set :applications_folder, DEPLOYMENT_CONFIG["applications_folder"]
-set :bundle_without, [:darwin, :development, :test]
 set :gemset_name, DEPLOYMENT_CONFIG["gemset_name"]
 set :rvm1_ruby_version, DEPLOYMENT_CONFIG["ruby_version"]
-set :rvm_ruby_gemset, "#{ruby_version}@#{gemset_name}"
-set :rvm_ruby_string, "#{rvm_ruby_gemset}"
+set :rvm_ruby_gemset, "#{fetch(:ruby_version)}@#{fetch(:gemset_name)}"
+set :rvm_ruby_string, "#{fetch(:rvm_ruby_gemset)}"
 set :user, DEPLOYMENT_CONFIG["user"]
 
 
@@ -88,12 +87,12 @@ namespace :deploy do
 
   desc "Set up externalised asset folders."
   task :setup_asset_vault do
-    puts "Creating asset folders in #{asset_vault_path}/#{application}"
+    puts "Creating asset folders in #{fetch(:asset_vault_path)}/#{fetch(:application)}"
 
-    run "mkdir -p #{asset_vault_path}/#{application}/Images/"
-    run "mkdir -p #{asset_vault_path}/#{application}/PDFs/"
+    run "mkdir -p #{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
+    run "mkdir -p #{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
 
-    run "chown -R #{user}:#{user} #{asset_vault_path}"
+    run "chown -R #{fetch(:user)}:#{fetch(:user)} #{fetch(:asset_vault_path)}"
   end
 
 end
