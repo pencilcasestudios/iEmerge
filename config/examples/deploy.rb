@@ -23,7 +23,7 @@ set :application, DEPLOYMENT_CONFIG["application_name"]
 set :applications_folder, DEPLOYMENT_CONFIG["applications_folder"]
 set :bundle_without, [:darwin, :development, :test]
 set :gemset_name, DEPLOYMENT_CONFIG["gemset_name"]
-set :ruby_version, DEPLOYMENT_CONFIG["ruby_version"]
+set :rvm1_ruby_version, DEPLOYMENT_CONFIG["ruby_version"]
 set :rvm_ruby_gemset, "#{ruby_version}@#{gemset_name}"
 set :rvm_ruby_string, "#{rvm_ruby_gemset}"
 set :user, DEPLOYMENT_CONFIG["user"]
