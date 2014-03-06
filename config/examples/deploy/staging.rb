@@ -14,8 +14,8 @@ set :branch, DEPLOYMENT_CONFIG["staging_repository_deployment_branch"]
 
 # Deployment dependencies
 # Ref: https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks#deploycheck
-depend :remote, :writable, "#{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
-depend :remote, :writable, "#{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
+#depend :remote, :writable, "#{fetch(:asset_vault_path)}/#{fetch(:application)}/Images/"
+#depend :remote, :writable, "#{fetch(:asset_vault_path)}/#{fetch(:application)}/PDFs/"
 
 
 
