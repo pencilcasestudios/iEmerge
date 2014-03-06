@@ -4,7 +4,7 @@ defaults: &defaults
   # 2. open - Don't authenticate with HTTP basic
   http_basic_access_mode: closed
   http_basic_name: preview
-  http_basic_password: dev  # Update this in production
+  http_basic_password: iemerge  # Update this in production
   test_user_password: password
 
   application_name: iEmerge
