@@ -1,15 +1,17 @@
 en:
   application:
+    client:
+      facebook_url: "https://www.facebook.com/pages/iEmerge-Agency/165541336834837"
+      name: "iEmerge Agency"
+      tagline: "A Leading Zambian Talent Agency"
+      twitter_url: "http://twitter.com/iEmergeAgency"
     developer:
       name: "Pencil Case Studios"
       url: "http://pencilcasestudios.com"
+    name: "iEmerge"
     meta_tags:
       description: "iEmerge"
-      keywords: "talent, modelling, model, iemerge, agency, zambia, jacklyn, nelly, miyanda"
-    name: "iEmerge"
-    owner:
-      name: "iEmerge Agency"
-    tagline_html: "A Leading Zambian Talent Agency"
+      keywords: "talent, modelling, modeling, zambia, zambian, fashion, design, audition, casting, model, iemerge, agency, jacklyn, nelly, miyanda"
 
 
 
@@ -25,6 +27,9 @@ en:
       _footer:
         copy:
           website_by: "Website by"
+        image_tags:
+          facebook: "Like us on Facebook"
+          twitter: "Follow us on Twitter"
     welcome:
       index:
         copy:
@@ -34,7 +39,7 @@ en:
             <p>Since establishment in January 2011, iEmerge has worked with several organisations and projects including:</p>
             <ul>
               <li>Cavendish University Zambia&mdash;Our models featured on the cover of the graduation booklet</li>
-              <li>Kutowa Designs&mdash;Model management for the luanch of Kutwa&rsquo;s Yatatu line</li>
+              <li>Kutowa Designs&mdash;Model management for the launch of Kutowa&rsquo;s Yatatu line</li>
               <li>Attitude Magazine</li>
               <li>JSW jewellary Fashion Show</li>
               <li>Inzy Photography</li>
@@ -93,3 +98,5 @@ en:
           welcome: "iEmerge"
           talent_agency: "A Leading Zambian Talent Agency"
         title: "A Leading Zambian Talent Agency"
+        image_tags:
+          iemerge: "iEmerge Agency"

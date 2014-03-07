@@ -11,11 +11,11 @@ module ApplicationHelper
       prefix: " ",
       reverse: true,
       site: t("application.name"),
-      title: t("application.tagline_html"),
+      title: t("application.client.tagline"),
       open_graph: {
         description: t("application.meta_tags.description"),
         image: root_url + asset_path("logos/galaunia_farms_logo-400x400.png"),
-        title: t("application.tagline_html"),
+        title: t("application.client.tagline"),
         type: :website,
         url: root_url,
       }
