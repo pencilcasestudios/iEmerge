@@ -31,7 +31,7 @@
 <section id="talent">
 	<div class="row">
 		<div class="medium-12 columns">
-			<%= t("views.welcome.index.copy.talent_html") %>
+			<h2><%= t("views.welcome.index.headings.talent") %></h2>
 		</div><!-- /.medium-# columns -->
 	</div><!-- /.row -->
 
@@ -41,6 +41,67 @@
 		<% end %>
 	</ul>
 </section><!-- /#talent -->
+
+
+
+
+<a name="work"></a>
+<section id="work">
+
+	<h2><%= t("views.welcome.index.headings.work") %></h2>
+
+	<div class="row">
+		<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+			<!-- Download portfolio -->
+			<li>
+				<%= link_to(image_tag("portfolio/iemerge_profile_cover.png", alt: t("views.welcome.index.image_tags.work.download_profile_html"), title: t("views.welcome.index.image_tags.work.download_profile_html")), asset_path("iemerge_profile.pdf", target: "_blank")) %><br />
+				<%= t("views.welcome.index.copy.work.download_profile_html") %>
+			</li>
+
+			<!-- Cavendish University -->
+			<li>
+				<%= image_tag("portfolio/cavendish_university.jpg", alt: t("views.welcome.index.image_tags.work.cavendish_university_html"), title: t("views.welcome.index.image_tags.work.cavendish_university_html")) %><br />
+				<%= t("views.welcome.index.copy.work.cavendish_university_html") %>
+			</li>
+
+			<!-- Miss University Africa -->
+			<li>
+				<%= image_tag("portfolio/miss_university_africa.jpg", alt: t("views.welcome.index.image_tags.work.miss_university_africa_html"), title: t("views.welcome.index.image_tags.work.miss_university_africa_html")) %><br />
+				<%= t("views.welcome.index.copy.work.miss_university_africa_html") %>
+			</li>
+
+			<!-- Zamtel and Ericsson - UNWTO -->
+			<li>
+				<%= image_tag("portfolio/zamtel_ericsson.jpg", alt: t("views.welcome.index.image_tags.work.zamtel_ericsson_html"), title: t("views.welcome.index.image_tags.work.zamtel_ericsson_html")) %><br />
+				<%= t("views.welcome.index.copy.work.zamtel_ericsson_html") %>
+			</li>
+
+			<!-- Sparke on Ice -->
+			<li>
+				<%= image_tag("portfolio/sparkle_on_ice.jpg", alt: t("views.welcome.index.image_tags.work.sparkle_on_ice_html"), title: t("views.welcome.index.image_tags.work.sparkle_on_ice_html")) %><br />
+				<%= t("views.welcome.index.copy.work.sparkle_on_ice_html") %>
+			</li>
+
+			<!-- Manda Hill Day of Fashion -->
+			<li>
+				<%= image_tag("portfolio/manda_hill_day_of_fashion.jpg", alt: t("views.welcome.index.image_tags.work.manda_hill_day_of_fashion_html"), title: t("views.welcome.index.image_tags.work.manda_hill_day_of_fashion_html")) %><br />
+				<%= t("views.welcome.index.copy.work.manda_hill_day_of_fashion_html") %>
+			</li>
+
+			<!-- Manda Hill Night of Fashion -->
+			<li>
+				<%= image_tag("portfolio/manda_hill_night_of_fashion.jpg", alt: t("views.welcome.index.image_tags.work.manda_hill_night_of_fashion_html"), title: t("views.welcome.index.image_tags.work.manda_hill_night_of_fashion_html")) %><br />
+				<%= t("views.welcome.index.copy.work.manda_hill_night_of_fashion_html") %>
+			</li>
+
+			<!-- Yatatu Launch -->
+			<li>
+				<%= image_tag("portfolio/yatatu_launch.jpg", alt: t("views.welcome.index.image_tags.work.yatatu_launch_html"), title: t("views.welcome.index.image_tags.work.yatatu_launch_html")) %><br />
+				<%= t("views.welcome.index.copy.work.yatatu_launch_html") %>
+			</li>
+		</ul>
+	</div>
+</section>
 
 
 

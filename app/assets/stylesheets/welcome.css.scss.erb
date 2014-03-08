@@ -6,6 +6,14 @@ section {
 	margin-bottom: 0.5em;
 }
 
+
+
+
+
+
+
+
+
 #welcome #hero {
 	background-color: $black;
 }
@@ -18,6 +26,14 @@ section {
 #welcome #hero h2 {
 	color: lighten($black, 10%);
 }
+
+
+
+
+
+
+
+
 
 #welcome #about {
 	background: url(<%= image_url("backgrounds/background1-1024x680.jpg") %>);
@@ -39,6 +55,14 @@ section {
 	color: darken($white, 10%);
   text-shadow: 2px 2px 2px $shadow_black;
 }
+
+
+
+
+
+
+
+
 
 #welcome #talent {
 	background-color: darken($grey, 50%);
@@ -67,6 +91,41 @@ section {
 	border: 2px solid $black;
 }
 
+
+
+
+
+
+
+
+
+#welcome #work {
+	background-color: lighten($white, 0%);
+}
+
+#welcome #work h2 {
+	text-align: center;
+	color: darken($orange, 0%);
+	text-shadow: 2px 2px 2px $shadow_black;
+}
+
+#welcome #work ul li .caption {
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+#welcome #work ul li img {
+	border: 2px solid $black;
+}
+
+
+
+
+
+
+
+
+
 #welcome #team {
 	background: url(<%= image_url("backgrounds/background2-1024x680.jpg") %>);
 	background-size: cover;
@@ -89,10 +148,27 @@ section {
 	background: rgba(0,0,0,0.2);
 }
 
+
+
+
+
+
+
+
+
 #welcome #contact {
 	background: url(<%= image_url("backgrounds/background3-1024x680.jpg") %>);
 	background-size: cover;
 	background-position: right top;
+}
+
+#welcome #contact a {
+	color: darken($white, 5%);
+}
+
+#welcome #contact a:hover {
+	color: darken($white, 0%);
+	text-decoration: underline;
 }
 
 #welcome #contact h2 {
@@ -110,6 +186,11 @@ section {
 	padding: 0.15em 0.25em 0.15em 0.25em;
 	background: rgba(0,0,0,0.2);
 }
+
+
+
+
+
 
 
 
@@ -154,6 +235,29 @@ section {
 		text-align: right;
 	}
 }
+
+
+
+
+
+
+
+
+
+/* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	#welcome #work {
+		padding-left: 1%;
+		padding-right: 1%;
+	}
+}
+
+
+
+
+
+
+
 
 
 /*

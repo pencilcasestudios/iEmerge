@@ -38,13 +38,11 @@ en:
             <p>iEmerge Agency scouts for unique Zambian talent in modelling, photography, dance, fashion and design. Our vision is to become Zambia&rsquo;s first choice for talent management and we plan to grow to serve the entire region of Southern Africa.</p>
             <p>Since establishment in January 2011, iEmerge has worked with several organisations and projects including:</p>
             <ul>
-              <li>Cavendish University Zambia&mdash;Our models featured on the cover of the graduation booklet</li>
-              <li>Kutowa Designs&mdash;Model management for the launch of Kutowa&rsquo;s Yatatu line</li>
-              <li>Attitude Magazine</li>
-              <li>JSW Jewellery Fashion Show</li>
-              <li>Inzy Photography</li>
-              <li>FiahLink Photography</li>
-              <li>Miss Southern Africa International 2011</li>
+              <li>Zamtel and Ericsson&mdash;UNWTO 2013</li>
+              <li>Kutowa Designs&mdash;Launch of Kutowa&rsquo;s Yatatu line</li>
+              <li>Manda Hill Mall&mdash;Month of Fashion</li>
+              <li>Top Model of the World Zambia</li>
+              <li>The Bulletin &amp; Record</li>
             </ul>
             <p>The agency&rsquo;s role is to sign talented people and allow them to blossom in their areas of interest. We help young talent to get exposure to the industry and groom them to have confidence, poise and a winning attitude.</p>
           contact_html: |
@@ -70,8 +68,6 @@ en:
               <strong>Website</strong><br />
               <a href="http://iemergeagency.co.zm">iemergeagency.co.zm</a>
             </p>
-          talent_html: |
-            <h2>Talent</h2>
           team_html: |
             <h2>Our Team</h2>
             <p>
@@ -91,12 +87,38 @@ en:
               Lusako Sichali
             </p>
             <p>
+              <strong>Events Manager</strong><br />
+              Miyanda Kalyala
+            </p>
+            <!--
+            <p>
               <strong>Assistant</strong><br />
               Lwiza Musazulwa
             </p>
+            -->
+          work:
+            cavendish_university_html: "<div class=\"caption\">Cavendish University</div>"
+            download_profile_html: "<div class=\"caption\">Download the iEmerge company profile</div>"
+            manda_hill_day_of_fashion_html: "<div class=\"caption\">Manda Hill<br />Day of Fashion</div>"
+            manda_hill_night_of_fashion_html: "<div class=\"caption\">Manda Hill<br />Night of Fashion</div>"
+            miss_university_africa_html: "<div class=\"caption\">Miss University Africa Zambia</div>"
+            sparkle_on_ice_html: "<div class=\"caption\">Sparkle on Ice<br />Fashion Show</div>"
+            yatatu_launch_html: "<div class=\"caption\">Kutowa Designs<br />Yatatu Launch</div>"
+            zamtel_ericsson_html: "<div class=\"caption\">Zamtel Ericsson<br />UNWTO</div>"
         headings:
-          welcome: "iEmerge"
+          talent: "Talent"
           talent_agency: "A Leading Zambian Talent Agency"
+          welcome: "iEmerge"
+          work: "Work"
         title: "A Leading Zambian Talent Agency"
         image_tags:
           iemerge: "iEmerge Agency"
+          work:
+            cavendish_university_html: "Cavendish University"
+            download_profile_html: "Download the iEmerge company profile"
+            manda_hill_day_of_fashion_html: "Manda Hill&mdash;Day of Fashion"
+            manda_hill_night_of_fashion_html: "Manda Hill&mdash;Night of Fashion"
+            miss_university_africa_html: "Miss University Africa Zambia"
+            sparkle_on_ice_html: "Sparkle on Ice&mdash;Fashion Show"
+            yatatu_launch_html: "Kutowa Designs&mdash;Yatatu Launch"
+            zamtel_ericsson_html: "Zamtel Ericsson&mdash;UNWTO"
