@@ -36,7 +36,7 @@ en:
           about_html: |
             <h2>About iEmerge</h2>
             <p>iEmerge Agency scouts for unique Zambian talent in modelling, photography, dance, fashion and design. Our vision is to become Zambia&rsquo;s first choice for talent management and we plan to grow to serve the entire region of Southern Africa.</p>
-            <p>Since establishment in January 2011, iEmerge has worked with several organisations and projects including:</p>
+            <p>Since registration as a company in January 2011, iEmerge has worked with several organisations and projects including:</p>
             <ul>
               <li>Zamtel and Ericsson&mdash;UNWTO 2013</li>
               <li>Kutowa Designs&mdash;Launch of Kutowa&rsquo;s Yatatu line</li>
@@ -104,7 +104,7 @@ en:
             miss_university_africa_html: "<div class=\"caption\">Miss University Africa Zambia</div>"
             sparkle_on_ice_html: "<div class=\"caption\">Sparkle on Ice<br />Fashion Show</div>"
             yatatu_launch_html: "<div class=\"caption\">Kutowa Designs<br />Yatatu Launch</div>"
-            zamtel_ericsson_html: "<div class=\"caption\">Zamtel Ericsson<br />UNWTO</div>"
+            zamtel_ericsson_html: "<div class=\"caption\">Zamtel and Ericsson<br />UNWTO</div>"
         headings:
           talent: "Talent"
           talent_agency: "A Leading Zambian Talent Agency"
