@@ -35,9 +35,23 @@
 		</div><!-- /.medium-# columns -->
 	</div><!-- /.row -->
 
+	<%
+		talents = [
+			"Chipo",		# 1
+			"Gwen",			# 2
+			"Muzala",		# 3
+			"Patrish",	# 4
+			"Susan",		# 5
+			"Tasha",		# 6
+		]
+	%>
+
 	<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-6">
-		<% for index in 1..12 do %>
-			<li><%= image_tag("models/model#{ index }.jpg", class: "photo")  %></li>
+		<% talents.each_with_index do |talent, index| %>
+			<li>
+				<%= image_tag("talents/talent#{ index + 1 }.jpg", class: "photo")  %><br />
+				<%= talent %>
+			</li>
 		<% end %>
 	</ul>
 </section><!-- /#talent -->
