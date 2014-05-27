@@ -37,7 +37,6 @@ bundle update
 gem cleanup
 rake db:drop
 rake db:setup
-rake db:test:prepare
 bundle exec guard
 
 
@@ -48,8 +47,8 @@ bundle exec guard
 cd ~/Projects/Clients/iEmerge
 rails server # In one terminal window - to run the application
 
-cd ~/Projects/Clients/iEmerge
-rake jobs:work # In another terminal window - to run delayed job
+#cd ~/Projects/Clients/iEmerge
+#rake jobs:work # In another terminal window - to run delayed job
 
 cd ~/Projects/Clients/iEmerge
 rails console # In another terminal window - to manage administrators
