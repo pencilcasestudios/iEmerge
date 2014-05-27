@@ -12,7 +12,7 @@
 				<%= link_to t("application.developer.name"), t("application.developer.url") %><br />
 
 				&copy;
-				<%= Time.now.year %>
+				<%= RomanNumerals.to_roman(Time.zone.now.year) %>
 				<%= link_to t("application.client.name"), root_path %><br />
 			</p>
 		</div><!-- /.medium-# columns -->
