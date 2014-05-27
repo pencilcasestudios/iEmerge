@@ -3,7 +3,7 @@ source "https://rubygems.org"
 
 
 
-gem "rails", "~> 4.0.2"
+gem "rails", "~> 4.1.1"
 
 
 
@@ -19,7 +19,8 @@ gem "foundation-rails"
 gem "jbuilder"#, "~> 1.2"
 gem "jquery-rails"
 gem "meta-tags", require: "meta_tags"
-gem "sass-rails", "~> 4.0.3"
+gem "roman-numerals"
+gem "sass-rails"#, "~> 4.0.3"
 gem "settingslogic"
 gem "turbolinks"
 gem "uglifier"#, ">= 1.3.0"
@@ -27,17 +28,18 @@ gem "uglifier"#, ">= 1.3.0"
 
 
 
+
 group :test, :development do
 	# gem "debugger", group: [:development, :test]
   #gem "rb-inotify"
-  gem "rspec-rails", "~> 3.0.0.beta"
+  gem "rspec-rails"#, "~> 3.0.0.beta"
   gem "sqlite3"
 end
 
 group :development do
-  gem "capistrano", "~> 3.1"
-  gem "capistrano-bundler", "~> 1.1.2"
-  gem "capistrano-rails", "~> 1.1"
+  gem "capistrano"#, "~> 3.1"
+  gem "capistrano-bundler"#, "~> 1.1.2"
+  gem "capistrano-rails"#, "~> 1.1"
   gem "capistrano-rvm"
   gem "letter_opener"
   gem "rvm1-capistrano3", require: false
@@ -51,7 +53,7 @@ group :test do
   gem "guard-rspec", require: false
   gem "guard-spork"
   gem "launchy" # Ref: http://techiferous.com/2010/04/using-capybara-in-rails-3/ for save_and_open_page to work
-  gem "rspec", "~> 3.0.0.beta2"
+  gem "rspec"#, "~> 3.0.0.beta2"
   gem "spork-rails"
 end
 
