@@ -55,6 +55,8 @@ end
 
 group :development do
 	gem "capistrano-rails", "~> 1.1"
+	gem "letter_opener", "~> 1.2.0"
+	gem "rvm1-capistrano3", "~> 1.2.2"
 end
 
 
