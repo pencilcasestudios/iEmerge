@@ -1,86 +1,61 @@
-require "spec_helper"
-
-describe "Assets" do
-  # In app/assets/stylesheets/
-  describe "app/assets/stylesheets/" do
-    it "has stylesheet assets" do
-      get "/assets/styles.css"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-
-      get "/assets/welcome.css"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-    end
-  end
+require "rails_helper"
 
 
 
 
-  # In app/assets/
-  describe "app/assets/fonts/" do
-    it "has font assets" do
-      # Test that fonts are present
-    end
-  end
+describe "Image assets" do
+	it "are available" do
+		# Favicons
+		expect(File.exist?("app/assets/images/apple-touch-icon.png")).to be true
+		expect(File.exist?("app/assets/images/apple-touch-icon-72x72.png")).to be true
+		expect(File.exist?("app/assets/images/apple-touch-icon-114x114.png")).to be true
+		expect(File.exist?("app/assets/images/favicon.ico")).to be true
+
+		# Logos
+		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_black-3000x3000.png")).to be true
+		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_black-400x400.png")).to be true
+		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_white-3000x3000.png")).to be true
+		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_white-400x400.png")).to be true
+
+		# Backgrounds
+		expect(File.exist?("app/assets/images/backgrounds/background1-1024x680.jpg")).to be true
+		expect(File.exist?("app/assets/images/backgrounds/background2-1024x680.jpg")).to be true
+		expect(File.exist?("app/assets/images/backgrounds/background3-1024x680.jpg")).to be true
+
+		# Portfolio
+		expect(File.exist?("app/assets/images/portfolio/cavendish_university.jpg")).to be true
+		expect(File.exist?("app/assets/images/portfolio/iemerge_profile_cover.png")).to be true
+		expect(File.exist?("app/assets/images/portfolio/manda_hill_day_of_fashion.jpg")).to be true
+		expect(File.exist?("app/assets/images/portfolio/manda_hill_night_of_fashion.jpg")).to be true
+		expect(File.exist?("app/assets/images/portfolio/miss_university_africa.jpg")).to be true
+		expect(File.exist?("app/assets/images/portfolio/sparkle_on_ice.jpg")).to be true
+		expect(File.exist?("app/assets/images/portfolio/yatatu_launch.jpg")).to be true
+		expect(File.exist?("app/assets/images/portfolio/zamtel_ericsson.jpg")).to be true
+
+		# Talent
+		expect(File.exist?("app/assets/images/talent/talent1.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent2.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent3.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent4.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent5.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent6.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent7.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent8.jpg")).to be true
+		expect(File.exist?("app/assets/images/talent/talent9.jpg")).to be true
+	end
+end
 
 
 
 
-  # In app/assets/images/
-  describe "app/assets/images/" do
-    it "has image assets" do
-      # Favicons
-      get "/assets/apple-touch-icon.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-
-      get "/assets/apple-touch-icon-72x72.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-
-      get "/assets/apple-touch-icon-114x114.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-
-      get "/assets/favicon.ico"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-    end
-  end
 
 
 
 
-  # In app/assets/images/logos/
-  describe "app/assets/images/logos/" do
-    it "has image assets" do
-      # Logos
-      get "/assets/logos/iemerge_agency_logo_black-3000x3000.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
 
-      get "/assets/logos/iemerge_agency_logo_black-400x400.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-
-      get "/assets/logos/iemerge_agency_logo_white-3000x3000.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-
-      get "/assets/logos/iemerge_agency_logo_white-400x400.png"
-      expect(response).to be_success
-      expect(response.status).to eq(200)
-    end
-  end
-
-
-
-
-  # ZURB Foundation assets
-  describe "Foundation assets" do
-    it "are available" do
-      # Test that assets are present
-    end
-  end
+describe "PDF assets" do
+	it "are available" do
+		# PDFs
+		expect(File.exist?("app/assets/pdfs/iemerge_profile.pdf")).to be true
+	end
 end
