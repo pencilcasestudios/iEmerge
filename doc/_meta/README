@@ -223,7 +223,7 @@ sudo openssl x509 -req -days 365 -in iemerge.virtual.csr -signkey iemerge.virtua
 
 
 # Test the nginx configuration:
-sudo nginx -t
+sudo service nginx configtest
 
 # If all is well, load the new nginx configuration:
 sudo service nginx reload
@@ -423,7 +423,7 @@ sudo openssl x509 -req -days 365 -in iemerge.clientcase.net.csr -signkey iemerge
 
 
 # Test the nginx configuration:
-sudo nginx -t
+sudo service nginx configtest
 
 # If all is well, load the new nginx configuration:
 sudo service nginx reload
@@ -597,7 +597,7 @@ scp nginx.iemergeagency.com.conf silumesii@deuteronomy.vps:~/iemergeagency.com.c
 # Set up the nginx configuration
 ssh silumesii@deuteronomy.vps
 sudo mv ~/iemergeagency.com.conf /etc/nginx/sites-available
-sudo ln -nfs /etc/nginx/sites-available/iemergeagency.com.conf /etc/nginx/sites-enabled/iemerge.zm
+sudo ln -nfs /etc/nginx/sites-available/iemergeagency.com.conf /etc/nginx/sites-enabled/iemergeagency.com
 
 
 # Generate an SSL certificate and key:
@@ -627,7 +627,7 @@ sudo openssl x509 -req -days 365 -in iemergeagency.com.csr -signkey iemergeagenc
 
 
 # Test the nginx configuration:
-sudo nginx -t
+sudo service nginx configtest
 
 # If all is well, load the new nginx configuration:
 sudo service nginx reload
