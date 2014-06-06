@@ -8,61 +8,11 @@ gem "rails", "~> 4.1.1"
 
 
 
-#gem "bcrypt-ruby", "~> 3.1.2" # Use ActiveModel has_secure_password
-#gem "cancan"
-#gem "delayed_job_active_record"
-#gem "nested_form"
-#gem "paper_trail"
-#gem "state_machine"
-gem "coffee-rails"#, "~> 4.0.0"
-gem "foundation-rails"
-gem "jbuilder"#, "~> 1.2"
-gem "jquery-rails"
-gem "meta-tags", require: "meta_tags"
-gem "roman-numerals"
-gem "sass-rails"#, "~> 4.0.3"
-gem "settingslogic"
-gem "turbolinks"
-gem "uglifier"#, ">= 1.3.0"
-
-
-
-
-
-group :test, :development do
-	# gem "debugger", group: [:development, :test]
-  #gem "rb-inotify"
-  gem "rspec-rails"#, "~> 3.0.0.beta"
-  gem "sqlite3"
-end
-
-group :development do
-  gem "capistrano"#, "~> 3.1"
-  gem "capistrano-bundler"#, "~> 1.1.2"
-  gem "capistrano-rails"#, "~> 1.1"
-  gem "capistrano-rvm"
-  gem "letter_opener"
-  gem "rvm1-capistrano3", require: false
-end
-
-group :test do
-  #gem "rack_session_access"
-  gem "capybara"
-  gem "factory_girl_rails"
-  gem "guard-bundler"
-  gem "guard-rspec", require: false
-  gem "guard-spork"
-  gem "launchy" # Ref: http://techiferous.com/2010/04/using-capybara-in-rails-3/ for save_and_open_page to work
-  gem "rspec"#, "~> 3.0.0.beta2"
-  gem "spork-rails"
-end
-
-group :production do
-  gem "exception_notification"
-  gem "mysql2"
-end
-
-#group :doc do
-#  # bundle exec rake doc:rails generates the API under doc/api.
-#  gem "sdoc", require: false
-#end
+gem 'sqlite3', '~> 1.3.9'
+gem 'settingslogic', '~> 2.0.9'
+gem 'meta-tags', '~> 2.0.0'
+gem 'sass-rails', '~> 4.0.3'
+gem 'foundation-rails', '~> 5.2.3.0'
+gem 'roman-numerals', '~> 0.3.0'
+gem 'jquery-rails', '~> 3.1.0'
+gem 'turbolinks', '~> 2.2.2'
