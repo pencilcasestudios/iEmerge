@@ -3,8 +3,18 @@ require "rails_helper"
 
 
 
+
+
+
+
+
 describe "Image assets" do
 	it "are available" do
+		# Backgrounds
+		expect(File.exist?("app/assets/images/backgrounds/background1-1024x680.jpg")).to be true
+		expect(File.exist?("app/assets/images/backgrounds/background2-1024x680.jpg")).to be true
+		expect(File.exist?("app/assets/images/backgrounds/background3-1024x680.jpg")).to be true
+
 		# Favicons
 		expect(File.exist?("app/assets/images/apple-touch-icon.png")).to be true
 		expect(File.exist?("app/assets/images/apple-touch-icon-72x72.png")).to be true
@@ -16,11 +26,6 @@ describe "Image assets" do
 		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_black-400x400.png")).to be true
 		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_white-3000x3000.png")).to be true
 		expect(File.exist?("app/assets/images/logos/iemerge_agency_logo_white-400x400.png")).to be true
-
-		# Backgrounds
-		expect(File.exist?("app/assets/images/backgrounds/background1-1024x680.jpg")).to be true
-		expect(File.exist?("app/assets/images/backgrounds/background2-1024x680.jpg")).to be true
-		expect(File.exist?("app/assets/images/backgrounds/background3-1024x680.jpg")).to be true
 
 		# Portfolio
 		expect(File.exist?("app/assets/images/portfolio/cavendish_university.jpg")).to be true
