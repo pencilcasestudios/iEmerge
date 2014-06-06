@@ -590,14 +590,14 @@ sudo chown -R deploy:deploy /var/AssetsVault
 # Configure nginx
 # On the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/nginx
-scp nginx.iemerge.zm.conf silumesii@deuteronomy.vps:~/iemerge.zm.conf
+scp nginx.iemergeagency.com.conf silumesii@deuteronomy.vps:~/iemergeagency.com.conf
 
 
 # On the production machine
 # Set up the nginx configuration
 ssh silumesii@deuteronomy.vps
-sudo mv ~/iemerge.zm.conf /etc/nginx/sites-available
-sudo ln -nfs /etc/nginx/sites-available/iemerge.zm.conf /etc/nginx/sites-enabled/iemerge.zm
+sudo mv ~/iemergeagency.com.conf /etc/nginx/sites-available
+sudo ln -nfs /etc/nginx/sites-available/iemergeagency.com.conf /etc/nginx/sites-enabled/iemerge.zm
 
 
 # Generate an SSL certificate and key:
@@ -605,25 +605,25 @@ sudo mkdir -p /etc/nginx/ssl
 cd /etc/nginx/ssl
 sudo mkdir -p iEmerge
 cd iEmerge
-sudo openssl genrsa -des3 -out iemerge.zm.key 1024
+sudo openssl genrsa -des3 -out iemergeagency.com.key 1024
 
 # pass phrase: iemerge
 
-sudo openssl req -new -key iemerge.zm.key -out iemerge.zm.csr
+sudo openssl req -new -key iemergeagency.com.key -out iemergeagency.com.csr
 
 # Country Name: ZM
 # Province: Lusaka Province
 # Locality Name: Lusaka
 # Organisation Name: iEmerge Agency
 # Orgnisational Unit Name: <Blank>
-# Common Name: iemerge.zm.
+# Common Name: iemergeagency.com.
 # Email: itsupport@pencilcasestudios.com
 # Challenge password: <Blank>
 # Optional Company Name: <Blank>
 
-sudo cp iemerge.zm.key iemerge.zm.key.original
-sudo openssl rsa -in iemerge.zm.key.original -out iemerge.zm.key
-sudo openssl x509 -req -days 365 -in iemerge.zm.csr -signkey iemerge.zm.key -out iemerge.zm.crt
+sudo cp iemergeagency.com.key iemergeagency.com.key.original
+sudo openssl rsa -in iemergeagency.com.key.original -out iemergeagency.com.key
+sudo openssl x509 -req -days 365 -in iemergeagency.com.csr -signkey iemergeagency.com.key -out iemergeagency.com.crt
 
 
 # Test the nginx configuration:
@@ -651,12 +651,12 @@ create database iEmerge_production_test;
 # Setup the Monit scripts:
 # From the development machine
 cd ~/Projects/Clients/iEmerge/config/examples/monit
-scp delayed_job.iemerge.zm.monitrc silumesii@deuteronomy.vps:~
+scp delayed_job.iemergeagency.com.monitrc silumesii@deuteronomy.vps:~
 cd ~/Projects/Clients/iEmerge
 ssh silumesii@deuteronomy.vps
 
 # From the production machine
-sudo mv ~/delayed_job.iemerge.zm.monitrc /etc/monit/conf.d/
+sudo mv ~/delayed_job.iemergeagency.com.monitrc /etc/monit/conf.d/
 sudo service monit syntax
 
 
