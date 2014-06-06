@@ -16,6 +16,7 @@ gem "roman-numerals", "~> 0.3.0"
 gem "sass-rails", "~> 4.0.3"
 gem "settingslogic", "~> 2.0.9"
 gem "turbolinks", "~> 2.2.2"
+gem "uglifier", "~> 2.5.0"
 
 
 
