@@ -12,10 +12,10 @@ body {
 footer {
 	padding-top: 2em;
 	padding-bottom: 2em;
-}
 
-footer p {
-	text-align: right;
-	font-size: 0.7em;
-	color: darken($grey, 20%);
+	p {
+		text-align: right;
+		font-size: 0.7em;
+		color: darken($grey, 20%);
+	}
 }
