@@ -1,8 +1,11 @@
 en:
   application:
     client:
+      email: "&#x68;&#x65;&#x6c;&#x6c;&#x6f;&#x40;&#x69;&#x65;&#x6d;&#x65;&#x72;&#x67;&#x65;&#x61;&#x67;&#x65;&#x6e;&#x63;&#x79;&#x2e;&#x63;&#x6f;&#x6d;"
       facebook_url: "https://www.facebook.com/iemergeagency"
       name: "iEmerge Agency"
+      phone_1: "097 898 7562"
+      phone_2: "097 775 5329"
       tagline: "A Leading Zambian Talent Agency"
       twitter_url: "http://twitter.com/iEmergeAgency"
     developer:
@@ -45,29 +48,7 @@ en:
               <li>The Bulletin &amp; Record</li>
             </ul>
             <p>The agency&rsquo;s role is to sign talented people and allow them to blossom in their areas of interest. We help young talent to get exposure to the industry and groom them to have confidence, poise and a winning attitude.</p>
-          contact_html: |
-            <h2>Contact iEmerge</h2>
-            <p>
-              <strong>Phone</strong><br />
-              <a href="tel:0978987562">097 898 7562</a><br />
-              <a href="tel:0977755329">097 775 5329</a>
-            </p>
-            <p>
-              <strong>Email</strong><br />
-              <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x68;&#x65;&#x6c;&#x6c;&#x6f;&#x40;&#x69;&#x65;&#x6d;&#x65;&#x72;&#x67;&#x65;&#x61;&#x67;&#x65;&#x6e;&#x63;&#x79;&#x2e;&#x63;&#x6f;&#x6d;">&#x68;&#x65;&#x6c;&#x6c;&#x6f;&#x40;&#x69;&#x65;&#x6d;&#x65;&#x72;&#x67;&#x65;&#x61;&#x67;&#x65;&#x6e;&#x63;&#x79;&#x2e;&#x63;&#x6f;&#x6d;</a>
-            </p>
-            <p>
-              <strong>Twitter</strong><br />
-              <a href="http://twitter.com/iemergeagency">@iemergeagency</a>
-            </p>
-            <p>
-              <strong>Facebook</strong><br />
-              <a href="http://facebook.com/iemergeagency">iemergeagency</a>
-            </p>
-            <p>
-              <strong>Website</strong><br />
-              <a href="http://iemergeagency.com">iemergeagency.com</a>
-            </p>
+          facebook_page_name: iemergeagency
           team_html: |
             <h2>Our Team</h2>
             <p>
@@ -96,6 +77,8 @@ en:
               Lwiza Musazulwa
             </p>
             -->
+          twitter_profile_name: "@iemergeagency"
+          website_address: "iemergeagency.com"
           work:
             cavendish_university_html: "<div class=\"caption\">Cavendish University</div>"
             download_profile_html: "<div class=\"caption\">Download the iEmerge company profile</div>"
@@ -106,8 +89,14 @@ en:
             yatatu_launch_html: "<div class=\"caption\">Kutowa Designs<br />Yatatu Launch</div>"
             zamtel_ericsson_html: "<div class=\"caption\">Zamtel and Ericsson<br />UNWTO</div>"
         headings:
+          contact_iemerge: "Contact iEmerge"
+          email: "Email"
+          facebook: "Facebook"
+          phone: "Phone"
           talent: "Talent"
           talent_agency: "A Leading Zambian Talent Agency"
+          twitter: "Twitter"
+          website: "Website"
           welcome: "iEmerge"
           work: "Work"
         title: "A Leading Zambian Talent Agency"
