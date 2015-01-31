@@ -2,14 +2,14 @@
 # Development setup
 # Setting up the development environment after a fresh repository clone
 #----------------------------------------------------------------------
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 cp config/examples/database/database.yml config # Setup the database
 cp config/examples/config/config.yml config # Setup the configuration files
 cp config/examples/deploy.rb config # Setup the capistrano deployment recipe
 cp config/examples/deploy/*.rb config/deploy # Setup deployment stage configuration
 
 # Link externalised assets:
-cd ~/Projects/Clients/iEmerge/app/assets
+cd ~/Code/iEmerge/app/assets
 ln -nfs ~/Dropbox/iEmerge\ Office/Repositories/Images/ images
 ln -nfs ~/Dropbox/iEmerge\ Office/Repositories/PDFs/ pdfs
 
@@ -32,7 +32,7 @@ git push staging
 git push production
 
 # Guard for testing
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 bundle update
 gem cleanup
 rake db:drop
@@ -44,13 +44,13 @@ guard
 
 # Running the Application
 #========================
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 rails server # In one terminal window - to run the application
 
-#cd ~/Projects/Clients/iEmerge
+#cd ~/Code/iEmerge
 #rake jobs:work # In another terminal window - to run delayed job
 
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 rails console # In another terminal window - to manage administrators
 
 
@@ -71,7 +71,7 @@ gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 # Continuous Application Deployment
 #==================================
 # VIRTUAL
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git checkout master
 git merge dev
 git push
@@ -80,7 +80,7 @@ cap virtual deploy
 git tag "`date +virtual_%Y-%m-%d_%H%M%S`"
 
 # STAGING
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git checkout master
 git merge dev
 git push
@@ -89,7 +89,7 @@ cap staging deploy
 git tag "`date +staging_%m-%d_%H%M%S`"
 
 # PRODUCTION
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git checkout master
 git merge dev
 git push
@@ -166,7 +166,7 @@ git init --bare
 
 # Push to the Git repository:
 # From the development machine:
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git remote add virtual deploy@rails.vm:/var/Repositories/Git/iEmerge.git
 git push virtual # or git push virtual master
 
@@ -185,7 +185,7 @@ sudo chown -R deploy:deploy /var/AssetsVault
 
 # Configure nginx
 # On the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/nginx
+cd ~/Code/iEmerge/config/examples/nginx
 scp nginx.iemerge.virtual.conf vladimir@rails.vm:~/iemerge.virtual.conf
 
 
@@ -245,9 +245,9 @@ create database iEmerge_virtual_test;
 
 # Setup the Monit scripts:
 # From the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/monit
+cd ~/Code/iEmerge/config/examples/monit
 scp delayed_job.iemerge.virtual.monitrc vladimir@rails.vm:~
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 ssh vladimir@rails.vm
 
 # From the virtual machine
@@ -257,11 +257,11 @@ sudo service monit syntax
 
 # Setup the YAML configuration files:
 # From the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/config
+cd ~/Code/iEmerge/config/examples/config
 scp config.virtual.yml deploy@rails.vm:~/config.yml
-cd ~/Projects/Clients/iEmerge/config/examples/database
+cd ~/Code/iEmerge/config/examples/database
 scp database.virtual.yml deploy@rails.vm:~/database.yml
-cd ~/Projects/Clients/iEmerge/
+cd ~/Code/iEmerge/
 ssh deploy@rails.vm
 
 # From the virtual machine (as the deploy user)
@@ -273,7 +273,7 @@ mv config.yml ~/Projects/Configurations/iEmerge/virtual/
 # From the development machine
 # Capistrano steps for initial deployment
 # VIRTUAL MACHINE DEPLOYMENT
-cd ~/Projects/Clients/iEmerge/
+cd ~/Code/iEmerge/
 git checkout master
 git merge dev
 git push
@@ -366,7 +366,7 @@ git init --bare
 
 # Push to the Git repository:
 # From the development machine:
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git remote add staging deploy@genesis.vps:/var/Repositories/Git/iEmerge.git
 git push staging # or git push staging master
 
@@ -385,7 +385,7 @@ sudo chown -R deploy:deploy /var/AssetsVault
 
 # Configure nginx
 # On the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/nginx
+cd ~/Code/iEmerge/config/examples/nginx
 scp nginx.iemerge.clientcase.net.conf silumesii@genesis.vps:~/iemerge.clientcase.net.conf
 
 
@@ -446,9 +446,9 @@ create database iEmerge_staging_test;
 
 # Setup the Monit scripts:
 # From the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/monit
+cd ~/Code/iEmerge/config/examples/monit
 scp delayed_job.iemerge.clientcase.net.monitrc silumesii@genesis.vps:~
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 ssh silumesii@genesis.vps
 
 # From the staging machine
@@ -458,11 +458,11 @@ sudo service monit syntax
 
 # Setup the YAML configuration files:
 # From the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/config
+cd ~/Code/iEmerge/config/examples/config
 scp config.staging.yml deploy@genesis.vps:~/config.yml
-cd ~/Projects/Clients/iEmerge/config/examples/database
+cd ~/Code/iEmerge/config/examples/database
 scp database.staging.yml deploy@genesis.vps:~/database.yml
-cd ~/Projects/Clients/iEmerge/
+cd ~/Code/iEmerge/
 ssh deploy@genesis.vps
 
 # From the staging machine (as the deploy user)
@@ -477,7 +477,7 @@ mv config.yml ~/Projects/Configurations/iEmerge/staging/
 # From the development machine
 # Capistrano steps for initial deployment
 # STAGING MACHINE DEPLOYMENT
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git checkout master
 git merge dev
 git push
@@ -570,7 +570,7 @@ git init --bare
 
 # Push to the Git repository:
 # From the development machine:
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git remote add production deploy@deuteronomy.vps:/var/Repositories/Git/iEmerge.git
 git push production # or git push production master
 
@@ -589,7 +589,7 @@ sudo chown -R deploy:deploy /var/AssetsVault
 
 # Configure nginx
 # On the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/nginx
+cd ~/Code/iEmerge/config/examples/nginx
 scp nginx.iemergeagency.com.conf silumesii@deuteronomy.vps:~/iemergeagency.com.conf
 
 
@@ -650,9 +650,9 @@ create database iEmerge_production_test;
 
 # Setup the Monit scripts:
 # From the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/monit
+cd ~/Code/iEmerge/config/examples/monit
 scp delayed_job.iemergeagency.com.monitrc silumesii@deuteronomy.vps:~
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 ssh silumesii@deuteronomy.vps
 
 # From the production machine
@@ -662,11 +662,11 @@ sudo service monit syntax
 
 # Setup the YAML configuration files:
 # From the development machine
-cd ~/Projects/Clients/iEmerge/config/examples/config
+cd ~/Code/iEmerge/config/examples/config
 scp config.production.yml deploy@deuteronomy.vps:~/config.yml
-cd ~/Projects/Clients/iEmerge/config/examples/database
+cd ~/Code/iEmerge/config/examples/database
 scp database.production.yml deploy@deuteronomy.vps:~/database.yml
-cd ~/Projects/Clients/iEmerge/
+cd ~/Code/iEmerge/
 ssh deploy@deuteronomy.vps
 
 # From the production machine (as the deploy user)
@@ -681,7 +681,7 @@ mv config.yml ~/Projects/Configurations/iEmerge/production/
 # From the development machine
 # Capistrano steps for initial deployment
 # PRODUCTION MACHINE DEPLOYMENT
-cd ~/Projects/Clients/iEmerge
+cd ~/Code/iEmerge
 git checkout master
 git merge dev
 git push
