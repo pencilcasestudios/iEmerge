@@ -21,8 +21,8 @@ ping iemerge.dev
 
 # Setup deployment references:
 git remote add virtual deploy@rails.vm:/var/Repositories/Git/iEmerge.git
-git remote add staging deploy@genesis.vps:/var/Repositories/Git/iEmerge.git
-git remote add production deploy@deuteronomy.vps:/var/Repositories/Git/iEmerge.git
+git remote add staging deploy@asher.vps:/var/Repositories/Git/iEmerge.git
+git remote add production deploy@gad.vps:/var/Repositories/Git/iEmerge.git
 
 
 
@@ -332,36 +332,36 @@ sudo service monit reload
 
 
 # Test SSH access:
-ssh deploy@genesis.vps
-ssh silumesii@genesis.vps
+ssh deploy@asher.vps
+ssh silumesii@asher.vps
 
 # Set up the hosts (/etc/hosts):
-ssh silumesii@genesis.vps
+ssh silumesii@asher.vps
 
 # Make sure the following line is in /etc/hosts:
-# 127.0.0.1 genesis.vps
+# 127.0.0.1 asher.vps
 
 # Check that SSH "loops back" on the staging machine (host key verification):
 # On the local development machine
-ssh deploy@genesis.vps
+ssh deploy@asher.vps
 
 # On the staging machine
-ssh deploy@genesis.vps
+ssh deploy@asher.vps
 
 # Or
 
 # If the "loop back" fails:
 ssh-keygen
-ssh-copy-id deploy@genesis.vps
+ssh-copy-id deploy@asher.vps
 
 
 # Set up the Repository folder
-ssh silumesii@genesis.vps
+ssh silumesii@asher.vps
 sudo mkdir -p /var/Repositories/Git
 sudo chown -R deploy:deploy /var/Repositories
 
 # Create the Git repository:
-ssh deploy@genesis.vps
+ssh deploy@asher.vps
 cd /var/Repositories/Git/
 mkdir iEmerge.git
 cd iEmerge.git
@@ -370,7 +370,7 @@ git init --bare
 # Push to the Git repository:
 # From the development machine:
 cd ~/Code/iEmerge
-git remote add staging deploy@genesis.vps:/var/Repositories/Git/iEmerge.git
+git remote add staging deploy@asher.vps:/var/Repositories/Git/iEmerge.git
 git push staging # or git push staging master
 
 
@@ -389,12 +389,12 @@ sudo chown -R deploy:deploy /var/AssetsVault
 # Configure nginx
 # On the development machine
 cd ~/Code/iEmerge/config/examples/nginx
-scp nginx.iemerge.clientcase.net.conf silumesii@genesis.vps:~/iemerge.clientcase.net.conf
+scp nginx.iemerge.clientcase.net.conf silumesii@asher.vps:~/iemerge.clientcase.net.conf
 
 
 # On the staging machine
 # Set up the nginx configuration
-ssh silumesii@genesis.vps
+ssh silumesii@asher.vps
 sudo mv ~/iemerge.clientcase.net.conf /etc/nginx/sites-available
 sudo ln -nfs /etc/nginx/sites-available/iemerge.clientcase.net.conf /etc/nginx/sites-enabled/iemerge.clientcase.net
 
@@ -432,7 +432,7 @@ sudo service nginx configtest
 sudo service nginx reload
 
 # Setup the MariaDB database user:
-ssh silumesii@genesis.vps
+ssh silumesii@asher.vps
 mysql -u root -p
 create user 'iemerge'@'localhost' identified by 'StagingiEmergePassword';
 grant all on iEmerge_staging.* to 'iemerge'@'localhost';
@@ -440,7 +440,7 @@ grant all on iEmerge_staging_development.* to 'iemerge'@'localhost';
 grant all on iEmerge_staging_test.* to 'iemerge'@'localhost';
 
 # Setup the MariaDB database:
-ssh deploy@genesis.vps
+ssh deploy@asher.vps
 mysql -u iemerge -p
 create database iEmerge_staging;
 create database iEmerge_staging_development;
@@ -450,9 +450,9 @@ create database iEmerge_staging_test;
 # Setup the Monit scripts:
 # From the development machine
 cd ~/Code/iEmerge/config/examples/monit
-scp delayed_job.iemerge.clientcase.net.monitrc silumesii@genesis.vps:~
+scp delayed_job.iemerge.clientcase.net.monitrc silumesii@asher.vps:~
 cd ~/Code/iEmerge
-ssh silumesii@genesis.vps
+ssh silumesii@asher.vps
 
 # From the staging machine
 sudo mv ~/delayed_job.iemerge.clientcase.net.monitrc /etc/monit/conf.d/
@@ -462,11 +462,11 @@ sudo service monit syntax
 # Setup the YAML configuration files:
 # From the development machine
 cd ~/Code/iEmerge/config/examples/config
-scp config.staging.yml deploy@genesis.vps:~/config.yml
+scp config.staging.yml deploy@asher.vps:~/config.yml
 cd ~/Code/iEmerge/config/examples/database
-scp database.staging.yml deploy@genesis.vps:~/database.yml
+scp database.staging.yml deploy@asher.vps:~/database.yml
 cd ~/Code/iEmerge/
-ssh deploy@genesis.vps
+ssh deploy@asher.vps
 
 # From the staging machine (as the deploy user)
 cd
@@ -492,7 +492,7 @@ cap staging deploy:check # Update configuration files and create the database af
 
 # From the staging machine (as the deploy user)
 # After running cap staging deploy:check
-ssh deploy@genesis.vps
+ssh deploy@asher.vps
 cd ~/Projects/Configurations/iEmerge/staging
 cp *.yml /var/Apps/iEmerge/staging/shared/config/
 
@@ -536,36 +536,36 @@ sudo service monit reload
 
 
 # Test SSH access:
-ssh deploy@deuteronomy.vps
-ssh silumesii@deuteronomy.vps
+ssh deploy@gad.vps
+ssh silumesii@gad.vps
 
 # Set up the hosts (/etc/hosts):
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 
 # Make sure the following line is in /etc/hosts:
-# 127.0.0.1 deuteronomy.vps
+# 127.0.0.1 gad.vps
 
 # Check that SSH "loops back" on the production machine (host key verification):
 # On the local development machine
-ssh deploy@deuteronomy.vps
+ssh deploy@gad.vps
 
 # On the production machine
-ssh deploy@deuteronomy.vps
+ssh deploy@gad.vps
 
 # Or
 
 # If the "loop back" fails:
 ssh-keygen
-ssh-copy-id deploy@deuteronomy.vps
+ssh-copy-id deploy@gad.vps
 
 
 # Set up the Repository folder
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 sudo mkdir -p /var/Repositories/Git
 sudo chown -R deploy:deploy /var/Repositories
 
 # Create the Git repository:
-ssh deploy@deuteronomy.vps
+ssh deploy@gad.vps
 cd /var/Repositories/Git/
 mkdir iEmerge.git
 cd iEmerge.git
@@ -574,18 +574,18 @@ git init --bare
 # Push to the Git repository:
 # From the development machine:
 cd ~/Code/iEmerge
-git remote add production deploy@deuteronomy.vps:/var/Repositories/Git/iEmerge.git
+git remote add production deploy@gad.vps:/var/Repositories/Git/iEmerge.git
 git push production # or git push production master
 
 
 # Set up the Apps folder
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 sudo mkdir -p /var/Apps
 sudo chown -R deploy:deploy /var/Apps
 
 
 # Create the AssetsVault folder
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 sudo mkdir -p /var/AssetsVault
 sudo chown -R deploy:deploy /var/AssetsVault
 
@@ -593,12 +593,12 @@ sudo chown -R deploy:deploy /var/AssetsVault
 # Configure nginx
 # On the development machine
 cd ~/Code/iEmerge/config/examples/nginx
-scp nginx.iemergeagency.com.conf silumesii@deuteronomy.vps:~/iemergeagency.com.conf
+scp nginx.iemergeagency.com.conf silumesii@gad.vps:~/iemergeagency.com.conf
 
 
 # On the production machine
 # Set up the nginx configuration
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 sudo mv ~/iemergeagency.com.conf /etc/nginx/sites-available
 sudo ln -nfs /etc/nginx/sites-available/iemergeagency.com.conf /etc/nginx/sites-enabled/iemergeagency.com
 
@@ -636,7 +636,7 @@ sudo service nginx configtest
 sudo service nginx reload
 
 # Setup the MariaDB database user:
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 mysql -u root -p
 create user 'iemerge'@'localhost' identified by 'ProductioniEmergePassword';
 grant all on iEmerge_production.* to 'iemerge'@'localhost';
@@ -644,7 +644,7 @@ grant all on iEmerge_production_development.* to 'iemerge'@'localhost';
 grant all on iEmerge_production_test.* to 'iemerge'@'localhost';
 
 # Setup the MariaDB database:
-ssh deploy@deuteronomy.vps
+ssh deploy@gad.vps
 mysql -u iemerge -p
 create database iEmerge_production;
 create database iEmerge_production_development;
@@ -654,9 +654,9 @@ create database iEmerge_production_test;
 # Setup the Monit scripts:
 # From the development machine
 cd ~/Code/iEmerge/config/examples/monit
-scp delayed_job.iemergeagency.com.monitrc silumesii@deuteronomy.vps:~
+scp delayed_job.iemergeagency.com.monitrc silumesii@gad.vps:~
 cd ~/Code/iEmerge
-ssh silumesii@deuteronomy.vps
+ssh silumesii@gad.vps
 
 # From the production machine
 sudo mv ~/delayed_job.iemergeagency.com.monitrc /etc/monit/conf.d/
@@ -666,11 +666,11 @@ sudo service monit syntax
 # Setup the YAML configuration files:
 # From the development machine
 cd ~/Code/iEmerge/config/examples/config
-scp config.production.yml deploy@deuteronomy.vps:~/config.yml
+scp config.production.yml deploy@gad.vps:~/config.yml
 cd ~/Code/iEmerge/config/examples/database
-scp database.production.yml deploy@deuteronomy.vps:~/database.yml
+scp database.production.yml deploy@gad.vps:~/database.yml
 cd ~/Code/iEmerge/
-ssh deploy@deuteronomy.vps
+ssh deploy@gad.vps
 
 # From the production machine (as the deploy user)
 cd
@@ -696,7 +696,7 @@ cap production deploy:check # Update configuration files and create the database
 
 # From the production machine (as the deploy user)
 # After running cap production deploy:check
-ssh deploy@deuteronomy.vps
+ssh deploy@gad.vps
 cd ~/Projects/Configurations/iEmerge/production
 cp *.yml /var/Apps/iEmerge/production/shared/config/
 
