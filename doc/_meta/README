@@ -34,13 +34,22 @@ git push virtual
 git push staging
 git push production
 
-# Guard for testing
+# Install gem bundles
+cd ~/Code/iEmerge
+bundle install
+
+
+# Update gem bundles
 cd ~/Code/iEmerge
 bundle update
 gem cleanup
+
+# Guard for testing
+cd ~/Code/iEmerge
 rake db:drop
 rake db:setup
-guard
+rake db:test:prepare
+bundle exec guard
 
 
 
