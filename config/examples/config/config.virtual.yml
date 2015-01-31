@@ -11,7 +11,7 @@ defaults: &defaults
   applications_folder: "/var/Apps"
   deploy_user: deploy
   gemset_name: iemerge-rails.4.x
-  ruby_version: ruby-2.1.0
+  ruby_version: ruby-2.2.0
 
   miniumum_version_of_bundler: ">=1.5.3"
   miniumum_version_of_rake: ">=10.1.0"
