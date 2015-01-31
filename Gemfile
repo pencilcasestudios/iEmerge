@@ -37,7 +37,7 @@ gem "treetop", "~> 1.4.8"						# mail (~> 2.5.4) ruby depends on treetop (~> 1.4
 
 
 group :test, :development do
-	gem "debugger", "~> 1.6.8"
+	gem "byebug", "~> 3.5.1"
 	gem "guard-bundler", "~> 2.0.0"
 	gem "guard-rspec", "~> 4.2.9"
 	gem "rspec-rails", "~> 3.0.1"
