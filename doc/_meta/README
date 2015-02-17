@@ -49,7 +49,7 @@ cd ~/Code/iEmerge
 rake db:drop
 rake db:setup
 rake db:test:prepare
-guard
+bundle exec guard
 
 
 
