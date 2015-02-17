@@ -167,7 +167,7 @@ ssh-copy-id deploy@rails.vm
 # Set up the Repository folder
 ssh vladimir@rails.vm
 sudo mkdir -p /var/Repositories/Git
-sudo chown -R deploy:deploy /var/Repositories
+sudo chown deploy:deploy /var/Repositories
 
 # Create the Git repository:
 ssh deploy@rails.vm
@@ -180,19 +180,19 @@ git init --bare
 # From the development machine:
 cd ~/Code/iEmerge
 git remote add virtual deploy@rails.vm:/var/Repositories/Git/iEmerge.git
-git push virtual # or git push virtual master
+git push virtual master # or git push virtual
 
 
 # Set up the Apps folder
 ssh vladimir@rails.vm
 sudo mkdir -p /var/Apps
-sudo chown -R deploy:deploy /var/Apps
+sudo chown deploy:deploy /var/Apps
 
 
 # Create the AssetsVault folder
 ssh vladimir@rails.vm
 sudo mkdir -p /var/AssetsVault
-sudo chown -R deploy:deploy /var/AssetsVault
+sudo chown deploy:deploy /var/AssetsVault
 
 
 # Configure nginx
@@ -231,6 +231,7 @@ sudo openssl req -new -key iemerge.virtual.key -out iemerge.virtual.csr
 
 sudo cp iemerge.virtual.key iemerge.virtual.key.original
 sudo openssl rsa -in iemerge.virtual.key.original -out iemerge.virtual.key
+
 sudo openssl x509 -req -days 365 -in iemerge.virtual.csr -signkey iemerge.virtual.key -out iemerge.virtual.crt
 
 
@@ -281,6 +282,7 @@ cd
 mkdir -p ~/Projects/Configurations/iEmerge/virtual
 mv database.yml ~/Projects/Configurations/iEmerge/virtual/
 mv config.yml ~/Projects/Configurations/iEmerge/virtual/
+exit
 
 # From the development machine
 # Capistrano steps for initial deployment
@@ -291,7 +293,6 @@ git merge dev
 git push
 git push virtual # May need to 'git push virtual master'
 cap virtual git:check
-cap virtual rvm1:install:rvm
 cap virtual deploy:setup_asset_vault
 cap virtual deploy:check # Update configuration files and create the database after this
 
@@ -367,7 +368,7 @@ ssh-copy-id deploy@asher.vps
 # Set up the Repository folder
 ssh silumesii@asher.vps
 sudo mkdir -p /var/Repositories/Git
-sudo chown -R deploy:deploy /var/Repositories
+sudo chown deploy:deploy /var/Repositories
 
 # Create the Git repository:
 ssh deploy@asher.vps
@@ -386,13 +387,13 @@ git push staging # or git push staging master
 # Set up the Apps folder
 ssh vladimir@rails.vm
 sudo mkdir -p /var/Apps
-sudo chown -R deploy:deploy /var/Apps
+sudo chown deploy:deploy /var/Apps
 
 
 # Create the AssetsVault folder
 ssh vladimir@rails.vm
 sudo mkdir -p /var/AssetsVault
-sudo chown -R deploy:deploy /var/AssetsVault
+sudo chown deploy:deploy /var/AssetsVault
 
 
 # Configure nginx
@@ -571,7 +572,7 @@ ssh-copy-id deploy@gad.vps
 # Set up the Repository folder
 ssh silumesii@gad.vps
 sudo mkdir -p /var/Repositories/Git
-sudo chown -R deploy:deploy /var/Repositories
+sudo chown deploy:deploy /var/Repositories
 
 # Create the Git repository:
 ssh deploy@gad.vps
@@ -590,13 +591,13 @@ git push production # or git push production master
 # Set up the Apps folder
 ssh silumesii@gad.vps
 sudo mkdir -p /var/Apps
-sudo chown -R deploy:deploy /var/Apps
+sudo chown deploy:deploy /var/Apps
 
 
 # Create the AssetsVault folder
 ssh silumesii@gad.vps
 sudo mkdir -p /var/AssetsVault
-sudo chown -R deploy:deploy /var/AssetsVault
+sudo chown deploy:deploy /var/AssetsVault
 
 
 # Configure nginx
