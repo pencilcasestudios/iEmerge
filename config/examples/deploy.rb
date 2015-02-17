@@ -96,7 +96,9 @@ namespace :deploy do
   # Ref: https://github.com/rvm/rvm1-capistrano3#security
   desc "Update the RVM key"
   task :update_rvm_key do
-    execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+    on roles(:all) do
+      execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+    end
   end
 end
 
