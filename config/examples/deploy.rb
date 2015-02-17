@@ -93,6 +93,11 @@ namespace :deploy do
     end
   end
 
+  # Ref: https://github.com/rvm/rvm1-capistrano3#security
+  desc "Update the RVM key"
+  task :update_rvm_key do
+    execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+  end
 end
 
 
@@ -100,7 +105,10 @@ end
 
 # Hooks
 # Ref: https://github.com/rvm/rvm1-capistrano3
+before "deploy", "rvm1:install:ruby"  # install/update Ruby
 before "deploy", "rvm1:install:rvm"  # install/update RVM
+before "rvm1:install:rvm", "deploy:update_rvm_key"
+
 
 # Synchronise assets
 before "deploy:compile_assets", "deploy:sync_assets"
