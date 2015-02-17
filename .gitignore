@@ -28,6 +28,10 @@ config/deploy.rb
 config/deploy/*.rb
 
 
+# Capistrano
+.capistrano
+
+
 # Ignore externalised assets (remember to link them for deployment)
 app/assets/docs
 app/assets/images
