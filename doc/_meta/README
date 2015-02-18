@@ -694,19 +694,18 @@ mv config.yml ~/Projects/Configurations/iEmerge/production/
 # From the development machine
 # Capistrano steps for initial deployment
 # PRODUCTION MACHINE DEPLOYMENT
-cd ~/Code/iEmerge
+cd ~/Code/iEmerge/
 git checkout master
 git merge dev
 git push
 git push production # May need to 'git push production master'
 cap production git:check
-cap production rvm1:install:rvm
 cap production deploy:setup_asset_vault
 cap production deploy:check # Update configuration files and create the database after this
 
 # From the production machine (as the deploy user)
 # After running cap production deploy:check
-ssh deploy@gad.vps
+ssh deploy@rails.vm
 cd ~/Projects/Configurations/iEmerge/production
 cp *.yml /var/Apps/iEmerge/production/shared/config/
 
