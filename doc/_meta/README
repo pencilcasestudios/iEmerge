@@ -680,9 +680,9 @@ scp config.production.yml deploy@gad.vps:~/config.yml
 cd ~/Code/iEmerge/config/examples/database
 scp database.production.yml deploy@gad.vps:~/database.yml
 cd ~/Code/iEmerge/
-ssh deploy@gad.vps
 
 # From the production machine (as the deploy user)
+ssh deploy@gad.vps
 cd
 mkdir -p ~/Projects/Configurations/iEmerge/production
 mv database.yml ~/Projects/Configurations/iEmerge/production/
