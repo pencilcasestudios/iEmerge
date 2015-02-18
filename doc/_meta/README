@@ -381,7 +381,7 @@ git init --bare
 # From the development machine:
 cd ~/Code/iEmerge
 git remote add staging deploy@asher.vps:/var/Repositories/Git/iEmerge.git
-git push staging # or git push staging master
+git push staging master # or git push staging
 
 
 # Set up the Apps folder
@@ -432,6 +432,7 @@ sudo openssl req -new -key iemerge.clientcase.net.key -out iemerge.clientcase.ne
 
 sudo cp iemerge.clientcase.net.key iemerge.clientcase.net.key.original
 sudo openssl rsa -in iemerge.clientcase.net.key.original -out iemerge.clientcase.net.key
+
 sudo openssl x509 -req -days 365 -in iemerge.clientcase.net.csr -signkey iemerge.clientcase.net.key -out iemerge.clientcase.net.crt
 
 
@@ -462,9 +463,9 @@ create database iEmerge_staging_test;
 cd ~/Code/iEmerge/config/examples/monit
 scp delayed_job.iemerge.clientcase.net.monitrc silumesii@asher.vps:~
 cd ~/Code/iEmerge
-ssh silumesii@asher.vps
 
 # From the staging machine
+ssh silumesii@asher.vps
 sudo mv ~/delayed_job.iemerge.clientcase.net.monitrc /etc/monit/conf.d/
 sudo service monit syntax
 
@@ -490,19 +491,18 @@ mv config.yml ~/Projects/Configurations/iEmerge/staging/
 # From the development machine
 # Capistrano steps for initial deployment
 # STAGING MACHINE DEPLOYMENT
-cd ~/Code/iEmerge
+cd ~/Code/iEmerge/
 git checkout master
 git merge dev
 git push
 git push staging # May need to 'git push staging master'
 cap staging git:check
-cap staging rvm1:install:rvm
 cap staging deploy:setup_asset_vault
 cap staging deploy:check # Update configuration files and create the database after this
 
 # From the staging machine (as the deploy user)
 # After running cap staging deploy:check
-ssh deploy@asher.vps
+ssh deploy@rails.vm
 cd ~/Projects/Configurations/iEmerge/staging
 cp *.yml /var/Apps/iEmerge/staging/shared/config/
 
