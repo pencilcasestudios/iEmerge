@@ -5,7 +5,7 @@ development:
   database: iEmerge_production_development
   pool: 5
   username: iemerge
-  password: VirtualiEmergePassword
+  password: ProductioniEmergePassword
   host: localhost
 
 test:
@@ -15,7 +15,7 @@ test:
   database: iEmerge_production_test
   pool: 5
   username: iemerge
-  password: VirtualiEmergePassword
+  password: ProductioniEmergePassword
   host: localhost
 
 production:
@@ -25,5 +25,5 @@ production:
   database: iEmerge_production
   pool: 5
   username: iemerge
-  password: VirtualiEmergePassword
+  password: ProductioniEmergePassword
   host: localhost
