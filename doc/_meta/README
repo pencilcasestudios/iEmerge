@@ -705,7 +705,7 @@ cap production deploy:check # Update configuration files and create the database
 
 # From the production machine (as the deploy user)
 # After running cap production deploy:check
-ssh deploy@rails.vm
+ssh deploy@gad.vps
 cd ~/Projects/Configurations/iEmerge/production
 cp *.yml /var/Apps/iEmerge/production/shared/config/
 
